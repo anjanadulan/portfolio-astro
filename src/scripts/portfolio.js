@@ -227,6 +227,7 @@ function initSkillsScrollShow() {
       card.style.opacity = String(state.opacity);
       card.style.transform = `translateY(${state.translateY}px)`;
       card.style.pointerEvents = state.isDominant ? 'auto' : 'none';
+      card.classList.toggle('active', state.isDominant);
 
       if (state.isDominant) {
         animateCardBars(card);
