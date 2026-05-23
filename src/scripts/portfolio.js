@@ -115,70 +115,155 @@ function initHeroTilt() {
   });
 }
 
-function initSkillsSwitcher() {
-  const categories = document.querySelector('.skills-categories');
-  const detailCards = Array.from(document.querySelectorAll('.skills-details .skill-detail-card'));
-  if (!categories || !detailCards.length) return;
+function initSkillsScrollShow() {
+  const skillsSection = document.getElementById('skills');
+  const pinWrapper = skillsSection?.querySelector('.skills-pin-wrapper');
+  const detailCards = Array.from(document.querySelectorAll('.skill-detail-card'));
+  if (!skillsSection || !detailCards.length) return;
 
-  const buttons = Array.from(categories.querySelectorAll('[data-category]'));
+  const isDesktop = window.innerWidth >= 921 && !prefersReducedMotion;
 
+  // Setup bars
   detailCards.forEach((card) => {
     card.querySelectorAll('.skill-bar-fill').forEach((bar) => {
-      bar.dataset.width = bar.style.width || '0%';
-      if (!prefersReducedMotion) bar.style.width = '0%';
-    });
-  });
-
-  function animateBars(card) {
-    card.querySelectorAll('.skill-bar-fill').forEach((bar, index) => {
-      const width = bar.dataset.width || '0%';
-      if (prefersReducedMotion) {
-        bar.style.width = width;
-        return;
-      }
-
+      const w = bar.style.width || '0%';
+      bar.style.setProperty('--target-width', w);
       bar.style.width = '0%';
-      window.setTimeout(() => {
-        bar.style.width = width;
-      }, 60 + index * 60);
+      bar.classList.remove('animated');
+    });
+  });
+
+  // Mobile / reduced motion: show all stacked cards
+  if (!isDesktop) {
+    detailCards.forEach((card) => {
+      card.style.position = 'static';
+      card.style.opacity = '1';
+      card.style.transform = 'none';
+      card.style.pointerEvents = 'auto';
+      card.querySelectorAll('.skill-bar-fill').forEach((bar) => bar.classList.add('animated'));
+      card.querySelectorAll('.skill-item').forEach((item) => item.classList.add('visible'));
+    });
+    skillsSection.classList.add('skills-header-visible');
+    return;
+  }
+
+  // Each card's visibility window through the pinned scroll (0-1 progress)
+  // Overlap creates crossfade. Total pinned scroll: 400vh.
+  const CARD_COUNT = detailCards.length;
+  const SLIDE_DURATION = 0.18;   // each card gets 18% of scroll runway
+  const FADE_DURATION  = 0.06;   // 6% for fade-in / fade-out
+
+  function getCardState(index, progress) {
+    const start = 0.06 + (index * (SLIDE_DURATION - FADE_DURATION));
+    const end   = start + SLIDE_DURATION;
+    const holdStart = start + FADE_DURATION;
+    const holdEnd   = end - FADE_DURATION;
+
+    let opacity = 0;
+    let translateY = 0;
+
+    if (progress < start || progress > end) {
+      opacity = 0;
+      translateY = progress < start ? 20 : -20;
+    } else if (progress < holdStart) {
+      const t = (progress - start) / FADE_DURATION;
+      opacity = t;
+      translateY = 20 * (1 - t);
+    } else if (progress < holdEnd) {
+      opacity = 1;
+      translateY = 0;
+    } else {
+      const t = (progress - holdEnd) / FADE_DURATION;
+      opacity = 1 - t;
+      translateY = -20 * t;
+    }
+
+    return { opacity, translateY, isDominant: opacity > 0.5 };
+  }
+
+  // Track which cards have had their bars animated
+  const barsAnimatedFor = new Set();
+
+  function animateCardBars(card) {
+    const idx = card.dataset.skillIndex;
+    if (barsAnimatedFor.has(idx)) return;
+    barsAnimatedFor.add(idx);
+
+    const items = card.querySelectorAll('.skill-item');
+    const bars  = card.querySelectorAll('.skill-bar-fill');
+
+    // Reset first
+    items.forEach((item) => item.classList.remove('visible'));
+    bars.forEach((bar) => {
+      bar.classList.remove('animated');
+      bar.style.width = '0%';
+    });
+
+    // Staggered reveal
+    items.forEach((item, i) => {
+      window.setTimeout(() => item.classList.add('visible'), 30 + i * 120);
+    });
+    bars.forEach((bar, i) => {
+      window.setTimeout(() => bar.classList.add('animated'), 60 + i * 140);
     });
   }
 
-  function showCategory(category) {
-    detailCards.forEach((card) => {
-      const isActive = card.id === `skill-${category}`;
-      card.classList.toggle('hidden', !isActive);
-      if (isActive) {
-        card.classList.add('visible');
-        animateBars(card);
+  let rafId = null;
+
+  function update() {
+    const rect = skillsSection.getBoundingClientRect();
+    const sectionH = skillsSection.offsetHeight;
+    const viewportH = window.innerHeight;
+    const scrolled = -rect.top;
+    const scrollable = sectionH - viewportH;
+    const progress = scrollable > 0 ? Math.max(0, Math.min(1, scrolled / scrollable)) : 1;
+
+    // Header always visible once pinned
+    skillsSection.classList.add('skills-header-visible');
+
+    // Update each card
+    detailCards.forEach((card, i) => {
+      const state = getCardState(i, progress);
+      card.style.opacity = String(state.opacity);
+      card.style.transform = `translateY(${state.translateY}px)`;
+      card.style.pointerEvents = state.isDominant ? 'auto' : 'none';
+
+      if (state.isDominant) {
+        animateCardBars(card);
       }
     });
 
-    buttons.forEach((button) => {
-      const isActive = button.dataset.category === category;
-      button.classList.toggle('active', isActive);
-      button.setAttribute('aria-pressed', String(isActive));
-    });
+    // Exit animation: last 15% of scroll
+    const exitProgress = Math.max(0, (progress - 0.78) / 0.15);
+    if (exitProgress > 0) {
+      pinWrapper.classList.add('skills-exiting');
+    } else {
+      pinWrapper.classList.remove('skills-exiting');
+    }
+
+    // Active state: dim projects only when the user is inside the skills section and before the exit transition starts
+    const isInsideSkills = scrolled >= 0 && scrolled <= scrollable;
+    if (isInsideSkills && progress < 0.78) {
+      document.body.classList.add('skills-active');
+    } else {
+      document.body.classList.remove('skills-active');
+    }
+
+    rafId = null;
   }
 
-  categories.addEventListener('click', (event) => {
-    const button = event.target.closest('[data-category]');
-    if (button) showCategory(button.dataset.category);
-  });
+  function onScroll() {
+    if (rafId) return;
+    rafId = requestAnimationFrame(update);
+  }
 
-  categories.addEventListener('keydown', (event) => {
-    if (event.key !== 'Enter' && event.key !== ' ') return;
-    const button = event.target.closest('[data-category]');
-    if (!button) return;
-    event.preventDefault();
-    showCategory(button.dataset.category);
-  });
-
-  showCategory(buttons[0]?.dataset.category || 'frontend');
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', update);
+  update();
 }
 
 function initScrollReveals() {
-  const revealTargets = document.querySelectorAll('.stat-item, .skill-category-card, .skill-detail-card, .project-card, .contact-content');
+  const revealTargets = document.querySelectorAll('.stat-item, .project-card, .contact-content');
   if (!revealTargets.length) return;
 
   if (!('IntersectionObserver' in window) || prefersReducedMotion) {
@@ -433,7 +518,7 @@ function initAll() {
   initSmoothAnchors();
   initScrollChoreography();
   initHeroTilt();
-  initSkillsSwitcher();
+  initSkillsScrollShow();
   initScrollReveals();
   initNavbar();
   initTypewriter();
