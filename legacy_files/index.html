@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anjana Wijerathna | Software Engineer</title>
+   <meta name="description" content="Premium portfolio of Anjana Wijerathna, a Software Engineer from Sri Lanka specializing in modern web applications with clean UI.">
+   <meta name="theme-color" content="#050816">
+   
+   <!-- Open Graph Meta Tags -->
+   <meta property="og:title" content="Anjana Wijerathna | Software Engineer">
+   <meta property="og:description" content="Premium portfolio of Anjana Wijerathna, a Software Engineer specializing in enterprise Java applications and IoT engineering.">
+   <meta property="og:image" content="https://anjanadulan.github.io/profile.jpg">
+   <meta property="og:url" content="https://anjanadulan.github.io">
+   <meta property="og:type" content="website">
+
+   <link rel="icon" type="image/png" href="favicon.png">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="styles.css">
+   <script src="https://cdn.jsdelivr.net/npm/tsparticles-preset-stars@2/tsparticles.preset.stars.bundle.min.js"></script>
+</head>
+<body>
+
+  <!-- Page Loader -->
+  <div id="page-loader" class="page-loader">
+    <div class="loader-spinner"></div>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div id="custom-cursor" class="custom-cursor"></div>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="back-to-top" aria-label="Scroll to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 15-6-6-6 6"/></svg>
+  </button>
+
+  <!-- Quick Contact Button -->
+  <a href="#contact" class="whatsapp-container" aria-label="Jump to contact section">
+    <div class="whatsapp-pulse"></div>
+    <div class="whatsapp-button">
+      <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/>
+      </svg>
+    </div>
+  </a>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#home" class="logo"><img src="source/aw-logo.png" alt="AW Logo" class="logo-img"></a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" type="button">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <button id="mobile-toggle" class="mobile-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="mobile-menu hidden">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div id="tsparticles-container" style="position: absolute; inset: 0; z-index: 1; pointer-events: none;"></div>
+    <div class="noise-overlay"></div>
+    <div class="container hero-container">
+      <!-- Left: Text Content -->
+      <div class="hero-content">
+        <p class="hero-subtitle">Welcome to my portfolio</p>
+        <h1 class="hero-title">Anjana <span class="text-gradient">Wijerathna</span></h1>
+        <div class="hero-tagline-wrapper">
+          <span class="hero-tagline-prefix">I am</span>
+          <span class="hero-tagline">
+            <span class="typewriter-text" id="typewriter"></span>
+            <span class="typewriter-cursor">|</span>
+          </span>
+        </div>
+        <p class="hero-bio">
+          Driven by a passion for bridging software and hardware, I specialize in enterprise Java applications and IoT engineering.
+        </p>
+        <div class="hero-buttons">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#contact" class="btn btn-secondary">Contact Me</a>
+          <a href="resume.pdf" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Resume
+          </a>
+        </div>
+        <div class="hero-socials">
+          <a href="https://github.com/anjanadulan" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/anjana-wijerathna-52a4a8354/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/__anj.u/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3h10zm-5 3c-2.757 0-5 2.243-5 5s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zm0 2a3 3 0 100 6 3 3 0 000-6zm4.5-.5a1 1 0 110 2 1 1 0 010-2z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Image with 3D Effect -->
+      <div class="hero-image-wrapper">
+        <!-- Offset Lines -->
+        <div class="offset-line offset-line-1"></div>
+        <div class="offset-line offset-line-2"></div>
+        <div class="offset-line offset-line-3"></div>
+        
+        <!-- Image Container -->
+        <div class="hero-image-container">
+          <div class="hero-image-glow"></div>
+          <img 
+            src="profile.jpg" 
+            alt="Anjana Wijerathna" 
+            class="hero-image"
+          />
+          <div class="hero-image-border"></div>
+        </div>
+
+        <!-- Floating Badge -->
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          <span>Available</span>
+        </div>
+
+        <!-- Corner Accents -->
+        <div class="corner-accent corner-accent-tl"></div>
+        <div class="corner-accent corner-accent-br"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <div class="noise-overlay"></div>
+    <!-- Cinematic Marquee Background -->
+    <div class="about-bg-text">
+      <div class="about-marquee-wrapper">
+        <span class="about-marquee-text">ABOUT&nbsp;&nbsp;&nbsp;</span>
+        <span class="about-marquee-text">ABOUT&nbsp;&nbsp;&nbsp;</span>
+        <span class="about-marquee-text">ABOUT&nbsp;&nbsp;&nbsp;</span>
+        <span class="about-marquee-text">ABOUT&nbsp;&nbsp;&nbsp;</span>
+      </div>
+    </div>
+    <div class="container">
+      <!-- Section Header -->
+      <div class="about-header">
+        <span class="about-pre-text">IDENTITY ARCHIVE</span>
+        <h2 class="section-title">About <span class="text-gradient">Me</span></h2>
+        <div class="scanner-line"></div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center" style="position: relative; z-index: 2;">
+        <!-- Left: Portrait -->
+        <div class="about-portrait flex justify-center lg:justify-start">
+          <!-- Decorative patterns (rings, blobs, grid) -->
+          <div class="about-decorations" aria-hidden="true">
+            <span class="decor-ring"></span>
+            <span class="decor-blob decor-blob-1"></span>
+            <span class="decor-blob decor-blob-2"></span>
+            <svg class="decor-grid" width="120" height="120" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="p" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="1" height="1" fill="rgba(255,255,255,0.06)"/></pattern></defs><rect width="100" height="100" fill="url(#p)" /></svg>
+          </div>
+
+          <div class="avatar-mask" style="transform: perspective(1000px) rotateY(-8deg) rotateX(3deg);" onmouseenter="this.style.transform='perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.03)'" onmouseleave="this.style.transform='perspective(1000px) rotateY(-8deg) rotateX(3deg)'">
+            <div class="avatar-inner rounded-3xl overflow-hidden" style="transform: translateZ(30px);">
+              <img src="profile.jpg" alt="Anjana Wijerathna" class="w-full h-full object-cover" style="filter: contrast(1.1) brightness(1.1) saturate(1.1);" />
+              <div class="img-overlay"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Right: Content -->
+        <div class="about-content-col flex flex-col gap-6">
+          <div class="content-card glass-card p-6 rounded-2xl">
+            <h3 class="content-card-title text-xl font-bold text-white mb-4">Who I Am</h3>
+            <div class="content-text">
+              <p class="text-gray-400 leading-relaxed">Driven by a passion for bridging software and hardware, I am a developer and student specializing in enterprise Java applications and IoT engineering. From building full-stack web platforms to designing smart hardware systems with Arduino, I focus on creating efficient, connected solutions that solve technical challenges at scale.</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="stat-card glass-card p-4 rounded-xl text-center">
+              <div class="stat-card-icon w-12 h-12 mx-auto mb-2 flex items-center justify-center rounded-lg" style="background: rgba(168, 85, 247, 0.1); color: var(--primary);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+              </div>
+              <div class="stat-card-value text-2xl font-bold text-white">2+</div>
+              <div class="stat-card-label text-sm text-gray-400">Years Experience</div>
+            </div>
+            <div class="stat-card glass-card p-4 rounded-xl text-center">
+              <div class="stat-card-icon w-12 h-12 mx-auto mb-2 flex items-center justify-center rounded-lg" style="background: rgba(168, 85, 247, 0.1); color: var(--primary);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              </div>
+              <div class="stat-card-value text-2xl font-bold text-white">10+</div>
+              <div class="stat-card-label text-sm text-gray-400">Projects Done</div>
+            </div>
+            <div class="stat-card glass-card p-4 rounded-xl text-center">
+              <div class="stat-card-icon w-12 h-12 mx-auto mb-2 flex items-center justify-center rounded-lg" style="background: rgba(168, 85, 247, 0.1); color: var(--primary);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
+              <div class="stat-card-value text-2xl font-bold text-white">3+</div>
+              <div class="stat-card-label text-sm text-gray-400">Technologies</div>
+            </div>
+            <div class="stat-card glass-card p-4 rounded-xl text-center">
+              <div class="stat-card-icon w-12 h-12 mx-auto mb-2 flex items-center justify-center rounded-lg" style="background: rgba(168, 85, 247, 0.1); color: var(--primary);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div class="stat-card-value text-2xl font-bold text-white">15+</div>
+              <div class="stat-card-label text-sm text-gray-400">Happy Clients</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="skills">
+    <div class="noise-overlay"></div>
+    <div class="container">
+      <div class="about-header">
+        <span class="about-pre-text">CORE CAPABILITIES</span>
+        <h2 class="section-title">Technical <span class="text-gradient">Arsenal</span></h2>
+        <div class="scanner-line"></div>
+      </div>
+
+      <div class="skills-grid">
+        <!-- Sidebar Categories -->
+        <aside class="skills-categories">
+          <button class="skill-category-card active" data-category="frontend">
+            <div class="skill-cat-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <div class="skill-cat-text">
+              <h4>Frontend</h4>
+              <p>Interface & Experience</p>
+            </div>
+          </button>
+
+          <button class="skill-category-card" data-category="backend">
+            <div class="skill-cat-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div class="skill-cat-text">
+              <h4>Backend</h4>
+              <p>Server & Logic</p>
+            </div>
+          </button>
+
+          <button class="skill-category-card" data-category="database">
+            <div class="skill-cat-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            </div>
+            <div class="skill-cat-text">
+              <h4>Database</h4>
+              <p>Architecture & Data</p>
+            </div>
+          </button>
+
+          <button class="skill-category-card" data-category="tools">
+            <div class="skill-cat-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <div class="skill-cat-text">
+              <h4>IoT & Tools</h4>
+              <p>Hardware & DevOps</p>
+            </div>
+          </button>
+        </aside>
+
+        <!-- Details Panel -->
+        <div class="skills-details">
+          <!-- Frontend -->
+          <div class="skill-detail-card" id="skill-frontend">
+            <h3>Frontend Mastery</h3>
+            <p class="detail-desc">Crafting pixel-perfect, interactive, and responsive user interfaces.</p>
+            <div class="skill-items">
+              <div class="skill-item">
+                <div class="skill-info"><span class="skill-name">React / Next.js</span><span class="skill-percentage">95%</span></div>
+                <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 95%;"></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info"><span class="skill-name">TypeScript</span><span class="skill-percentage">90%</span></div>
+                <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info"><span class="skill-name">Tailwind / CSS</span><span class="skill-percentage">92%</span></div>
+                <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 92%;"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Backend -->
+          <div class="skill-detail-card hidden" id="skill-backend">
+            <h3>Backend Powerhouse</h3>
+            <p class="detail-desc">Building scalable, secure, and efficient server-side architectures.</p>
+            <div class="skill-items">
+              <div class="skill-item">
+                <div class="skill-info"><span class="skill-name">Node.js / Express</span><span class="skill-percentage">88%</span></div>
+                <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 88%;"></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info"><span class="skill-name">Java (Spring Boot)</span><span class="skill-percentage">85%</span></div>
+                <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info"><span class="skill-name">RESTful APIs</span><span class="skill-percentage">90%</span></div>
+                <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Database -->
+          <div class="skill-detail-card hidden" id="skill-database">
+            <h3>Data Architecture</h3>
+            <p class="detail-desc">Designing optimized data models and managing complex query systems.</p>
+            <div class="skill-items">
+              <div class="skill-item">
+                <div class="skill-info"><span class="skill-name">PostgreSQL / SQL</span><span class="skill-percentage">87%</span></div>
+                <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 87%;"></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info"><span class="skill-name">MongoDB / NoSQL</span><span class="skill-percentage">82%</span></div>
+                <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 82%;"></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info"><span class="skill-name">Prisma / ORM</span><span class="skill-percentage">85%</span></div>
+                <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tools -->
+          <div class="skill-detail-card hidden" id="skill-tools">
+            <h3>Hardware & Tools</h3>
+            <p class="detail-desc">Bridging software and physical systems with IoT and modern dev tools.</p>
+            <div class="skill-items">
+              <div class="skill-item">
+                <div class="skill-info"><span class="skill-name">Arduino / IoT</span><span class="skill-percentage">90%</span></div>
+                <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info"><span class="skill-name">Git / GitHub</span><span class="skill-percentage">95%</span></div>
+                <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 95%;"></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info"><span class="skill-name">Electron / Desktop</span><span class="skill-percentage">80%</span></div>
+                <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 80%;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section - Cinematic -->
+  <section id="projects" class="cinematic-section">
+    <div class="parallax-background"></div>
+    <div class="parallax-content">
+      <div class="container">
+        <div class="cinematic-bg-text-container">
+          <div class="marquee-wrapper">
+            <span class="marquee-text">PROJECTS&nbsp;&nbsp;&nbsp;PROJECTS&nbsp;&nbsp;&nbsp;PROJECTS&nbsp;&nbsp;&nbsp;PROJECTS&nbsp;&nbsp;&nbsp;</span>
+          </div>
+        </div>
+
+        <div class="intro-header">
+          <span class="about-pre-text">DIGITAL ARCHIVE</span>
+          <h2 class="section-title">System <span class="text-gradient">Projects</span></h2>
+          <div class="scanner-line mx-auto"></div>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1: DISTRIBUTOR-MS -->
+          <div class="project-card">
+            <div class="project-showcase">
+              <div class="monitor-screen" style="background: linear-gradient(45deg, #1e1b4b, #4338ca); display: flex; align-items: center; justify-content: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" style="opacity: 0.5;">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+                  <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+                <div class="screen-glare"></div>
+              </div>
+            </div>
+            <div class="project-info">
+              <div class="project-header">
+                <h3 class="project-title">Distributor MS</h3>
+                <div class="active-indicator"></div>
+              </div>
+              <p class="project-desc">A full-stack Distribution Management System featuring role-based dashboards, inventory tracking, and automated reporting.</p>
+              <div class="tech-stack">
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">PostgreSQL</span>
+                <span class="tech-tag">Tailwind</span>
+                <span class="tech-tag">Electron</span>
+              </div>
+              <div class="card-actions">
+                <a href="projects.html" class="btn btn-secondary btn-sm">Read More</a>
+                <a href="https://github.com/anjanadulan/DISTRIBUTOR-MS" class="btn btn-secondary btn-sm" target="_blank" rel="noopener noreferrer">View Source</a>
+                <a href="https://distributor-ms.vercel.app" class="btn btn-primary btn-sm" style="padding: 0.5rem 1rem; font-size: 0.8rem; margin-left: 0.5rem;" target="_blank" rel="noopener noreferrer">Live Demo</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2: AGROCHAIN -->
+          <div class="project-card">
+            <div class="project-showcase">
+              <div class="monitor-screen" style="background: linear-gradient(45deg, #064e3b, #059669); display: flex; align-items: center; justify-content: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" style="opacity: 0.5;">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <div class="screen-glare"></div>
+              </div>
+            </div>
+            <div class="project-info">
+              <div class="project-header">
+                <h3 class="project-title">AgroChain</h3>
+                <div class="active-indicator"></div>
+              </div>
+              <p class="project-desc">Smart Agricultural Management System for field registration, crop monitoring, and connecting farmers with buyers.</p>
+              <div class="tech-stack">
+                <span class="tech-tag">Java 24</span>
+                <span class="tech-tag">Swing</span>
+                <span class="tech-tag">MySQL</span>
+                <span class="tech-tag">JDBC</span>
+              </div>
+              <div class="card-actions">
+                <a href="projects.html" class="btn btn-secondary btn-sm">Read More</a>
+                <a href="https://github.com/anjanadulan/AGROCHAIN" class="btn btn-secondary btn-sm" target="_blank" rel="noopener noreferrer">View Source</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3: SMART-PRISON-PROTOTYPE -->
+          <div class="project-card">
+            <div class="project-showcase">
+              <div class="monitor-screen" style="background: linear-gradient(45deg, #450a0a, #991b1b); display: flex; align-items: center; justify-content: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" style="opacity: 0.5;">
+                  <rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect>
+                  <path d="M7 2v20M17 2v20M2 12h20M2 7h20M2 17h20"></path>
+                </svg>
+                <div class="screen-glare"></div>
+              </div>
+            </div>
+            <div class="project-info">
+              <div class="project-header">
+                <h3 class="project-title">Smart Prison IoT</h3>
+                <div class="active-indicator"></div>
+              </div>
+              <p class="project-desc">IoT security prototype with automated lighting, motion-based alarms, and fire detection systems using Arduino.</p>
+              <div class="tech-stack">
+                <span class="tech-tag">Arduino</span>
+                <span class="tech-tag">IoT Sensors</span>
+                <span class="tech-tag">Logic Gates</span>
+                <span class="tech-tag">C++</span>
+              </div>
+              <div class="card-actions">
+                <a href="projects.html" class="btn btn-secondary btn-sm">Read More</a>
+                <a href="https://github.com/anjanadulan/SMART-PRISON-PROTOTYPE" class="btn btn-secondary btn-sm" target="_blank" rel="noopener noreferrer">View Source</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="extra-projects">
+          <a href="projects.html" class="btn btn-primary">View All Projects</a>
+          <a href="https://github.com/anjanadulan?tab=repositories" target="_blank" rel="noopener noreferrer" class="github-link">Browse GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <div class="noise-overlay"></div>
+    <div class="container">
+      <div class="intro-header">
+        <span class="about-pre-text">CONNECT WITH ME</span>
+      <h2 class="section-title">Get In <span class="text-gradient">Touch</span></h2>
+      </div>
+      <div class="contact-content glass-card">
+        <p class="contact-text">
+          I'm always open to new opportunities, collaborations, or just a friendly chat. 
+          Feel free to reach out!
+        </p>
+
+        <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+          <!-- Web3Forms Access Key -->
+          <input type="hidden" name="access_key" value="c407f4b0-9f28-4076-a31a-af42511d739e">
+          
+          <div class="form-group">
+            <input type="text" name="name" placeholder="Your Name" required class="form-input">
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" placeholder="Your Email" required class="form-input">
+          </div>
+          <div class="form-group">
+            <textarea name="message" placeholder="Your Message" required class="form-input" rows="4"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary w-full" style="margin-bottom: 2rem;">Send Message</button>
+        </form>
+
+        <div class="contact-buttons">
+          <a href="mailto:dulannimsara453@gmail.com" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Send Email
+          </a>
+          <a href="https://www.linkedin.com/in/anjana-wijerathna-52a4a8354/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+        <div class="contact-socials">
+          <a href="https://github.com/anjanadulan" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/__anj.u/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3h10zm-5 3c-2.757 0-5 2.243-5 5s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zm0 2a3 3 0 100 6 3 3 0 000-6zm4.5-.5a1 1 0 110 2 1 1 0 010-2z"/></svg>
+          </a>
+          <a href="mailto:dulannimsara453@gmail.com" class="social-icon" aria-label="Email">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>&copy; 2026 Anjana Wijerathna. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="https://github.com/anjanadulan" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/anjana-wijerathna-52a4a8354/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="mailto:dulannimsara453@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <script src="script.js"></script>
+  
+</body>
+</html>

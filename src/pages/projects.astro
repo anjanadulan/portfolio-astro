@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ProjectModal from '../components/ProjectModal.astro';
+import projects from '../data/projects.json';
+---
+
+<Layout title="Projects | Anjana Wijerathna" isProjectsPage={true}>
+  <section id="projects" class="projects-section">
+    <div class="container">
+      <div class="section-header center" style="margin-top: 1rem;">
+        <span class="section-label">All Work</span>
+        <h2 class="section-title">Projects</h2>
+        <p class="section-subtitle">A complete archive of my work across web, enterprise, and IoT engineering.</p>
+      </div>
+
+      <div class="projects-grid" style="margin-top: 2.5rem;">
+        {projects.map((p) => (
+          <ProjectCard
+            id={p.id}
+            title={p.title}
+            shortDesc={p.shortDesc}
+            tech={p.tech}
+            bgGradient={p.bgGradient}
+            icon={p.icon}
+          />
+        ))}
+      </div>
+
+      <div class="extra-projects">
+        <a href="https://github.com/anjanadulan?tab=repositories" target="_blank" rel="noopener noreferrer" class="github-link">Browse Full Repository</a>
+      </div>
+    </div>
+  </section>
+
+  <ProjectModal />
+</Layout>

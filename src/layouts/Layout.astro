@@ -1,0 +1,138 @@
+---
+import '../styles/global.css';
+import projectDataRaw from '../data/projects.json';
+import { ClientRouter } from 'astro:transitions';
+import { Image } from 'astro:assets';
+import logoImage from '../assets/aw-logo.png';
+
+interface Props {
+  title?: string;
+  description?: string;
+  isProjectsPage?: boolean;
+}
+
+const {
+  title = "Anjana Wijerathna | Software Engineer",
+  description = "Portfolio of Anjana Wijerathna — Software Engineer specializing in enterprise Java applications, IoT systems, and modern web development.",
+  isProjectsPage = false
+} = Astro.props;
+
+const homeUrl = isProjectsPage ? "index.html#home" : "#home";
+const aboutUrl = isProjectsPage ? "index.html#about" : "#about";
+const skillsUrl = isProjectsPage ? "index.html#skills" : "#skills";
+const projectsUrl = isProjectsPage ? "#projects" : "projects.html";
+const contactUrl = isProjectsPage ? "index.html#contact" : "#contact";
+---
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <meta name="theme-color" content="#0A0A0A">
+
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content="https://anjanadulan.github.io/profile.jpg">
+  <meta property="og:url" content="https://anjanadulan.github.io">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <ClientRouter />
+</head>
+<body>
+
+  <div id="page-loader" class="page-loader">
+    <div class="loader-spinner"></div>
+  </div>
+
+  <button id="back-to-top" class="back-to-top" aria-label="Scroll to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m18 15-6-6-6 6"/></svg>
+  </button>
+
+  <a href={contactUrl} class="contact-float" aria-label="Jump to contact section">
+    <div class="contact-float-button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/>
+      </svg>
+    </div>
+  </a>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href={homeUrl} class="logo">
+        <Image src={logoImage} alt="AW Logo" class="logo-img" width={36} height={36} loading="eager" />
+      </a>
+      <div class="nav-links">
+        <a href={aboutUrl}>About</a>
+        <a href={skillsUrl}>Skills</a>
+        <a href={projectsUrl}>Projects</a>
+        <a href={contactUrl}>Contact</a>
+      </div>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" type="button">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <button id="mobile-toggle" class="mobile-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="mobile-menu hidden">
+      <a href={aboutUrl}>About</a>
+      <a href={skillsUrl}>Skills</a>
+      <a href={projectsUrl}>Projects</a>
+      <a href={contactUrl}>Contact</a>
+    </div>
+  </nav>
+
+  <slot />
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>Designed & built by Anjana Wijerathna</p>
+      <div class="footer-links">
+        <a href="https://github.com/anjanadulan" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/anjana-wijerathna-52a4a8354/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="mailto:dulannimsara453@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script is:inline define:vars={{ projectDataRaw }}>
+    window.projectData = {};
+    projectDataRaw.forEach(p => {
+      window.projectData[p.id] = {
+        title: p.title,
+        category: p.category,
+        desc: p.desc,
+        tech: p.tech.map(t => `<span class="tech-tag">${t}</span>`).join(''),
+        features: p.features,
+        methods: p.methods,
+        github: p.github,
+        demo: p.demo,
+        role: p.role,
+        duration: p.duration,
+        challenge: p.challenge
+      };
+    });
+  </script>
+
+  <script src="../scripts/portfolio.js"></script>
+
+</body>
+</html>

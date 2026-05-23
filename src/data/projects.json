@@ -1,0 +1,139 @@
+[
+  {
+    "id": "distributor",
+    "title": "Distributor MS",
+    "category": "Enterprise Software & Distribution",
+    "desc": "A full-stack Distribution Management System featuring role-based dashboards, inventory tracking, and automated reporting. Built to streamline supply chain operations with robust analytics.",
+    "tech": ["Node.js", "PostgreSQL", "Tailwind", "Electron"],
+    "features": [
+      "Role-based dashboards (Admin, Distributor)",
+      "Real-time inventory tracking & alerts",
+      "Automated PDF invoicing & reporting",
+      "Local data caching for offline support"
+    ],
+    "methods": "RESTful API architecture, Client-Server Sync, Relational Database Modeling",
+    "github": "https://github.com/anjanadulan/DISTRIBUTOR-MS",
+    "demo": "https://distributor-ms.vercel.app",
+    "bgGradient": "linear-gradient(45deg, #1e1b4b, #4338ca)",
+    "icon": "monitor",
+    "role": "Full-stack Developer & DB Architect",
+    "duration": "6 Weeks",
+    "challenge": "Optimizing inventory search queries and maintaining smooth local caching for offline usability on desktop clients."
+  },
+  {
+    "id": "agrochain",
+    "title": "AgroChain",
+    "category": "Smart Agriculture & Supply Chain",
+    "desc": "Smart Agricultural Management System for field registration, crop monitoring, and connecting farmers with buyers. Features include real-time weather integration and yield prediction models.",
+    "tech": ["Java 24", "Swing", "MySQL", "JDBC"],
+    "features": [
+      "Farmer crop listing & pricing system",
+      "Weather API integration for crop safety",
+      "Secure buyer-seller messaging portal",
+      "Database backup and transaction logs"
+    ],
+    "methods": "Object-Oriented Programming (OOP), MVC Pattern, Relational DB Design, JDBC Connectivity",
+    "github": "https://github.com/anjanadulan/AGROCHAIN",
+    "bgGradient": "linear-gradient(45deg, #064e3b, #059669)",
+    "icon": "shield",
+    "role": "Backend Java Engineer",
+    "duration": "4 Weeks",
+    "challenge": "Implementing stable multi-tier database backups and managing transaction logs via secure JDBC queries without regressions."
+  },
+  {
+    "id": "smart-prison",
+    "title": "Smart Prison IoT",
+    "category": "IoT Security & Embedded Systems",
+    "desc": "IoT security prototype with automated lighting, motion-based alarms, and fire detection systems using Arduino. Includes a web dashboard for real-time monitoring and alert management.",
+    "tech": ["Arduino", "IoT Sensors", "Logic Gates", "C++"],
+    "features": [
+      "Automated perimeter motion sensors",
+      "Flame & smoke warning alarms",
+      "Central console web dashboard integration",
+      "Hardware failsafes using logic gates"
+    ],
+    "methods": "Hardware-Software Interfacing, Sensor Data Filtering, Event-driven Interrupts",
+    "github": "https://github.com/anjanadulan/SMART-PRISON-PROTOTYPE",
+    "bgGradient": "linear-gradient(45deg, #450a0a, #991b1b)",
+    "icon": "box",
+    "role": "IoT Systems Engineer & Embedded Developer",
+    "duration": "8 Weeks",
+    "challenge": "Interfacing multiple physical sensors under event-driven interrupts and filtering raw data noise for accurate alarm triggers."
+  },
+  {
+    "id": "simple-calc",
+    "title": "SimpleCalc",
+    "category": "Web Applications",
+    "desc": "A modern, Java Servlet-based web calculator featuring a responsive dark crimson glassmorphic user interface styled with Tailwind CSS.",
+    "tech": ["Java", "Servlets", "Tailwind CSS"],
+    "features": [
+      "Full arithmetic operation support",
+      "Responsive design for mobile & desktop",
+      "Calculation history tracking"
+    ],
+    "methods": "Servlet Request/Response Handling, Server-side Evaluation, Glassmorphic Styling",
+    "github": "https://github.com/anjanadulan/simpleCalc-jsp-servlets-",
+    "bgGradient": "linear-gradient(45deg, #7f1d1d, #b91c1c)",
+    "icon": "calculator",
+    "role": "Frontend Developer",
+    "duration": "1 Week",
+    "challenge": "Creating a responsive glassmorphic design that scales perfectly across extreme screen aspects using server-side servlet evaluations."
+  },
+  {
+    "id": "bookstore",
+    "title": "BookStore Website",
+    "category": "E-commerce Templates",
+    "desc": "PHP-based template for a bookstore website with user authentication and book catalog management.",
+    "tech": ["PHP", "MySQL", "HTML", "CSS"],
+    "features": [
+      "User registration & secure login",
+      "Catalog search and filtering by category",
+      "Virtual shopping cart & order placement"
+    ],
+    "methods": "Session Management, Relational Database Queries, CRUD Operations",
+    "github": "https://github.com/anjanadulan/BookStore_website-CW-",
+    "bgGradient": "linear-gradient(45deg, #1e3a8a, #2563eb)",
+    "icon": "book",
+    "role": "Full-stack Web Developer",
+    "duration": "3 Weeks",
+    "challenge": "Ensuring safe session validation for persistent shopping carts and optimizing database relational queries."
+  },
+  {
+    "id": "taxi",
+    "title": "Taxi Management System",
+    "category": "Web Dashboards & Interfaces",
+    "desc": "A web-based taxi management interface built with HTML, CSS, and basic JavaScript for managing rides and drivers.",
+    "tech": ["HTML", "CSS", "JS"],
+    "features": [
+      "Interactive booking requests form",
+      "Driver status tracking panel",
+      "Passenger management dashboard"
+    ],
+    "methods": "DOM Manipulation, LocalStorage mock data, CSS Grid layouts",
+    "github": "https://github.com/anjanadulan/TAXI_manage",
+    "bgGradient": "linear-gradient(45deg, #ca8a04, #eab308)",
+    "icon": "taxi",
+    "role": "Frontend & UI Developer",
+    "duration": "2 Weeks",
+    "challenge": "Manipulating complex client-side state for mock ride trackers and styling clean flex/grid panels for intuitive dispatch workflows."
+  },
+  {
+    "id": "camp-conn",
+    "title": "Camp-Conn",
+    "category": "Static Platforms",
+    "desc": "A web platform built to connect campers, featuring a clean, responsive HTML layout.",
+    "tech": ["HTML", "CSS"],
+    "features": [
+      "Campsite directory & reviews list",
+      "Responsive layouts for mobile viewports",
+      "Contact forms & interactive maps"
+    ],
+    "methods": "Responsive Web Design, Flexbox Layouts, Modern Typography",
+    "github": "https://github.com/anjanadulan/camp-conn",
+    "bgGradient": "linear-gradient(45deg, #166534, #22c55e)",
+    "icon": "map-pin",
+    "role": "UI/UX & Frontend Designer",
+    "duration": "2 Weeks",
+    "challenge": "Designing fluid grid-based image galleries and contact forms that resize seamlessly on legacy mobile screens."
+  }
+]
