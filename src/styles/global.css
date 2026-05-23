@@ -892,7 +892,7 @@ section {
   position: relative;
   width: min(100%, 680px);
   margin-inline: auto;
-  min-height: 340px;
+  min-height: 420px;
   padding: clamp(1.5rem, 3vw, 2rem);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
@@ -910,12 +910,14 @@ section {
   pointer-events: none;
   transform: translateY(20px);
   transition: opacity 500ms ease, transform 500ms var(--ease-out);
+  padding-top: 2rem;
 }
 
 .skill-detail-card.active {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
+  padding-bottom: 2rem;
 }
 
 .skill-detail-card h3 {
