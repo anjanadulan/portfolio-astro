@@ -159,6 +159,11 @@ function initSkillsScrollShow() {
     const holdStart = start + FADE_DURATION;
     const holdEnd   = end - FADE_DURATION;
 
+    // For the last card, once it fades in, it remains fully visible
+    if (index === CARD_COUNT - 1 && progress >= holdStart) {
+      return { opacity: 1, translateY: 0, isDominant: true };
+    }
+
     let opacity = 0;
     let translateY = 0;
 
@@ -234,13 +239,7 @@ function initSkillsScrollShow() {
       }
     });
 
-    // Exit animation: last 15% of scroll (starting at progress 0.80)
-    const exitProgress = Math.max(0, (progress - 0.80) / 0.15);
-    if (exitProgress > 0) {
-      pinWrapper.classList.add('skills-exiting');
-    } else {
-      pinWrapper.classList.remove('skills-exiting');
-    }
+
 
     // Active state: dim projects only when the user is inside the skills section and before the exit transition starts (before 0.80)
     const isInsideSkills = scrolled >= 0 && scrolled <= scrollable;
