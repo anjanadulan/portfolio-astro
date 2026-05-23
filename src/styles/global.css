@@ -935,11 +935,28 @@ section {
 }
 
 /* Skill items — staggered reveal when parent is active */
+/* Skill items grid */
+.skills-details .skill-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+/* Staggered reveal when parent is active */
 .skill-detail-card .skill-item {
-  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 0.5rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface-elevated);
+  cursor: pointer;
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 350ms ease, transform 350ms var(--ease-out);
+  transition: opacity 350ms ease, transform 350ms var(--ease-out), border-color 200ms ease, box-shadow 200ms ease;
 }
 
 .skill-detail-card.active .skill-item {
@@ -947,56 +964,56 @@ section {
   transform: translateY(0);
 }
 
-.skill-detail-card.active .skill-item:nth-child(1) { transition-delay: 60ms, 60ms; }
-.skill-detail-card.active .skill-item:nth-child(2) { transition-delay: 180ms, 180ms; }
-.skill-detail-card.active .skill-item:nth-child(3) { transition-delay: 300ms, 300ms; }
+/* Stagger delays for up to 7 items */
+.skill-detail-card.active .skill-item:nth-child(1) { transition-delay: 40ms, 40ms; }
+.skill-detail-card.active .skill-item:nth-child(2) { transition-delay: 80ms, 80ms; }
+.skill-detail-card.active .skill-item:nth-child(3) { transition-delay: 120ms, 120ms; }
+.skill-detail-card.active .skill-item:nth-child(4) { transition-delay: 160ms, 160ms; }
+.skill-detail-card.active .skill-item:nth-child(5) { transition-delay: 200ms, 200ms; }
+.skill-detail-card.active .skill-item:nth-child(6) { transition-delay: 240ms, 240ms; }
+.skill-detail-card.active .skill-item:nth-child(7) { transition-delay: 280ms, 280ms; }
 
-.skill-info {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
+.skill-detail-card .skill-item:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-accent);
+}
+
+.skill-detail-card .skill-item img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  transition: transform 300ms var(--ease-out);
+}
+
+.skill-detail-card .skill-item:hover img {
+  transform: scale(1.12);
+}
+
+.skill-detail-card .skill-name {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: 0.5rem;
+  transition: color 200ms ease;
+}
+
+.skill-detail-card .skill-item:hover .skill-name {
   color: var(--text);
-  font-weight: 500;
-  font-size: 0.85rem;
 }
 
-.skill-name { font-size: 0.85rem; }
-
-.skill-percentage {
-  color: var(--text-muted);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 500;
-  transition: color 300ms ease;
+/* Theme icon inversion helpers */
+.theme-icon-invert {
+  filter: invert(0);
+  transition: filter 200ms ease;
 }
 
-.skill-detail-card.active .skill-percentage {
-  color: var(--accent);
+:root.dark .theme-icon-invert,
+:root:not(.light) .theme-icon-invert {
+  filter: invert(1);
 }
-
-.skill-bar-container {
-  height: 4px;
-  overflow: hidden;
-  border-radius: 999px;
-  background: var(--surface);
-}
-
-.skill-bar-fill {
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
-  width: 0%;
-}
-
-.skill-bar-fill.animated {
-  width: var(--target-width);
-  transition: width 700ms var(--ease-out);
-}
-
-.skill-detail-card.active .skill-item:nth-child(1) .skill-bar-fill { transition-delay: 60ms; }
-.skill-detail-card.active .skill-item:nth-child(2) .skill-bar-fill { transition-delay: 180ms; }
-.skill-detail-card.active .skill-item:nth-child(3) .skill-bar-fill { transition-delay: 300ms; }
 
 /* Projects entrance when skills is active/exiting */
 #projects .section-header,

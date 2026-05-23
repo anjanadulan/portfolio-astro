@@ -123,16 +123,6 @@ function initSkillsScrollShow() {
 
   const isDesktop = window.innerWidth >= 921 && !prefersReducedMotion;
 
-  // Setup bars
-  detailCards.forEach((card) => {
-    card.querySelectorAll('.skill-bar-fill').forEach((bar) => {
-      const w = bar.style.width || '0%';
-      bar.style.setProperty('--target-width', w);
-      bar.style.width = '0%';
-      bar.classList.remove('animated');
-    });
-  });
-
   // Mobile / reduced motion: show all stacked cards
   if (!isDesktop) {
     detailCards.forEach((card) => {
@@ -140,7 +130,6 @@ function initSkillsScrollShow() {
       card.style.opacity = '1';
       card.style.transform = 'none';
       card.style.pointerEvents = 'auto';
-      card.querySelectorAll('.skill-bar-fill').forEach((bar) => bar.classList.add('animated'));
       card.querySelectorAll('.skill-item').forEach((item) => item.classList.add('visible'));
     });
     skillsSection.classList.add('skills-header-visible');
@@ -186,30 +175,22 @@ function initSkillsScrollShow() {
     return { opacity, translateY, isDominant: opacity > 0.5 };
   }
 
-  // Track which cards have had their bars animated
-  const barsAnimatedFor = new Set();
+  // Track which cards have had their item reveals animated
+  const cardsAnimatedFor = new Set();
 
   function animateCardBars(card) {
     const idx = card.dataset.skillIndex;
-    if (barsAnimatedFor.has(idx)) return;
-    barsAnimatedFor.add(idx);
+    if (cardsAnimatedFor.has(idx)) return;
+    cardsAnimatedFor.add(idx);
 
     const items = card.querySelectorAll('.skill-item');
-    const bars  = card.querySelectorAll('.skill-bar-fill');
 
     // Reset first
     items.forEach((item) => item.classList.remove('visible'));
-    bars.forEach((bar) => {
-      bar.classList.remove('animated');
-      bar.style.width = '0%';
-    });
 
     // Staggered reveal
     items.forEach((item, i) => {
       window.setTimeout(() => item.classList.add('visible'), 30 + i * 120);
-    });
-    bars.forEach((bar, i) => {
-      window.setTimeout(() => bar.classList.add('animated'), 60 + i * 140);
     });
   }
 

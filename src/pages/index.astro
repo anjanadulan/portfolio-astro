@@ -111,131 +111,129 @@ const featuredProjects = projects.slice(0, 3);
     </div>
   </section>
 
-  <!-- ═══ SKILLS ═══ -->
+  <!-- ═══ SKILLS — Pinned Scroll Section ═══ -->
   <section id="skills" class="skills">
-    <div class="container">
-      <div class="section-header center">
-        <span class="section-label">Core Capabilities</span>
-        <h2 class="section-title">Technical Arsenal</h2>
-        <p class="section-subtitle">The tools and technologies I use to build modern, scalable applications.</p>
-      </div>
-
-      <div class="skills-grid">
-        <aside class="skills-categories">
-          <button class="skill-category-card active" data-category="frontend">
-            <div class="skill-cat-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-            </div>
-            <div class="skill-cat-text">
-              <h4>Frontend</h4>
-              <p>Interface & Experience</p>
-            </div>
-          </button>
-
-          <button class="skill-category-card" data-category="backend">
-            <div class="skill-cat-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            </div>
-            <div class="skill-cat-text">
-              <h4>Backend</h4>
-              <p>Server & Logic</p>
-            </div>
-          </button>
-
-          <button class="skill-category-card" data-category="database">
-            <div class="skill-cat-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-            </div>
-            <div class="skill-cat-text">
-              <h4>Database</h4>
-              <p>Architecture & Data</p>
-            </div>
-          </button>
-
-          <button class="skill-category-card" data-category="tools">
-            <div class="skill-cat-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-            </div>
-            <div class="skill-cat-text">
-              <h4>IoT & Tools</h4>
-              <p>Hardware & DevOps</p>
-            </div>
-          </button>
-        </aside>
+    <div class="skills-pin-wrapper">
+      <div class="container">
+        <div class="section-header center">
+          <span class="section-label">Core Capabilities</span>
+          <h2 class="section-title">Technical Arsenal</h2>
+          <p class="section-subtitle">The tools and technologies I use to build modern, scalable applications.</p>
+        </div>
 
         <div class="skills-details">
-          <div class="skill-detail-card" id="skill-frontend">
+          <div class="skill-detail-card" id="skill-frontend" data-skill-index="0">
             <h3>Frontend Mastery</h3>
             <p class="detail-desc">Crafting pixel-perfect, interactive, and responsive user interfaces with modern frameworks.</p>
             <div class="skill-items">
               <div class="skill-item">
-                <div class="skill-info"><span class="skill-name">React / Next.js</span><span class="skill-percentage">95%</span></div>
-                <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 95%;"></div></div>
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" loading="lazy" />
+                <span class="skill-name">HTML5</span>
               </div>
               <div class="skill-item">
-                <div class="skill-info"><span class="skill-name">TypeScript</span><span class="skill-percentage">90%</span></div>
-                <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" loading="lazy" />
+                <span class="skill-name">CSS3</span>
               </div>
               <div class="skill-item">
-                <div class="skill-info"><span class="skill-name">Tailwind / CSS</span><span class="skill-percentage">92%</span></div>
-                <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 92%;"></div></div>
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" loading="lazy" />
+                <span class="skill-name">JavaScript</span>
+              </div>
+              <div class="skill-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" loading="lazy" />
+                <span class="skill-name">TypeScript</span>
+              </div>
+              <div class="skill-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" loading="lazy" />
+                <span class="skill-name">React</span>
+              </div>
+              <div class="skill-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" class="theme-icon-invert" alt="Next.js" loading="lazy" />
+                <span class="skill-name">Next.js</span>
+              </div>
+              <div class="skill-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind" loading="lazy" />
+                <span class="skill-name">Tailwind</span>
               </div>
             </div>
           </div>
 
-          <div class="skill-detail-card hidden" id="skill-backend">
+          <div class="skill-detail-card" id="skill-backend" data-skill-index="1">
             <h3>Backend Powerhouse</h3>
             <p class="detail-desc">Building scalable, secure, and efficient server-side architectures.</p>
             <div class="skill-items">
               <div class="skill-item">
-                <div class="skill-info"><span class="skill-name">Node.js / Express</span><span class="skill-percentage">88%</span></div>
-                <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 88%;"></div></div>
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" loading="lazy" />
+                <span class="skill-name">Java</span>
               </div>
               <div class="skill-item">
-                <div class="skill-info"><span class="skill-name">Java (Spring Boot)</span><span class="skill-percentage">85%</span></div>
-                <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring" loading="lazy" />
+                <span class="skill-name">Spring Boot</span>
               </div>
               <div class="skill-item">
-                <div class="skill-info"><span class="skill-name">RESTful APIs</span><span class="skill-percentage">90%</span></div>
-                <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" loading="lazy" />
+                <span class="skill-name">Node.js</span>
+              </div>
+              <div class="skill-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" class="theme-icon-invert" alt="Express" loading="lazy" />
+                <span class="skill-name">Express</span>
+              </div>
+              <div class="skill-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg" alt="NestJS" loading="lazy" />
+                <span class="skill-name">NestJS</span>
               </div>
             </div>
           </div>
 
-          <div class="skill-detail-card hidden" id="skill-database">
+          <div class="skill-detail-card" id="skill-database" data-skill-index="2">
             <h3>Data Architecture</h3>
             <p class="detail-desc">Designing optimized data models and managing complex query systems.</p>
             <div class="skill-items">
               <div class="skill-item">
-                <div class="skill-info"><span class="skill-name">PostgreSQL / SQL</span><span class="skill-percentage">87%</span></div>
-                <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 87%;"></div></div>
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" loading="lazy" />
+                <span class="skill-name">PostgreSQL</span>
               </div>
               <div class="skill-item">
-                <div class="skill-info"><span class="skill-name">MongoDB / NoSQL</span><span class="skill-percentage">82%</span></div>
-                <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 82%;"></div></div>
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" loading="lazy" />
+                <span class="skill-name">MySQL</span>
               </div>
               <div class="skill-item">
-                <div class="skill-info"><span class="skill-name">Prisma / ORM</span><span class="skill-percentage">85%</span></div>
-                <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" loading="lazy" />
+                <span class="skill-name">MongoDB</span>
+              </div>
+              <div class="skill-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prisma/prisma-original.svg" class="theme-icon-invert" alt="Prisma" loading="lazy" />
+                <span class="skill-name">Prisma ORM</span>
+              </div>
+              <div class="skill-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" alt="Redis" loading="lazy" />
+                <span class="skill-name">Redis</span>
               </div>
             </div>
           </div>
 
-          <div class="skill-detail-card hidden" id="skill-tools">
+          <div class="skill-detail-card" id="skill-tools" data-skill-index="3">
             <h3>Hardware & Tools</h3>
             <p class="detail-desc">Bridging software and physical systems with IoT and modern dev tools.</p>
             <div class="skill-items">
               <div class="skill-item">
-                <div class="skill-info"><span class="skill-name">Arduino / IoT</span><span class="skill-percentage">90%</span></div>
-                <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" alt="Arduino" loading="lazy" />
+                <span class="skill-name">Arduino</span>
               </div>
               <div class="skill-item">
-                <div class="skill-info"><span class="skill-name">Git / GitHub</span><span class="skill-percentage">95%</span></div>
-                <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 95%;"></div></div>
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" loading="lazy" />
+                <span class="skill-name">C++</span>
               </div>
               <div class="skill-item">
-                <div class="skill-info"><span class="skill-name">Electron / Desktop</span><span class="skill-percentage">80%</span></div>
-                <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 80%;"></div></div>
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" loading="lazy" />
+                <span class="skill-name">Git</span>
+              </div>
+              <div class="skill-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" class="theme-icon-invert" alt="GitHub" loading="lazy" />
+                <span class="skill-name">GitHub</span>
+              </div>
+              <div class="skill-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/electron/electron-original.svg" alt="Electron" loading="lazy" />
+                <span class="skill-name">Electron</span>
               </div>
             </div>
           </div>
