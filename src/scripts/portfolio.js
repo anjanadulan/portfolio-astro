@@ -148,13 +148,13 @@ function initSkillsScrollShow() {
   }
 
   // Each card's visibility window through the pinned scroll (0-1 progress)
-  // Overlap creates crossfade. Total pinned scroll: 400vh.
+  // Overlap creates crossfade. Total pinned scroll: 300vh.
   const CARD_COUNT = detailCards.length;
-  const SLIDE_DURATION = 0.18;   // each card gets 18% of scroll runway
-  const FADE_DURATION  = 0.06;   // 6% for fade-in / fade-out
+  const SLIDE_DURATION = 0.28;   // each card gets 28% of scroll runway
+  const FADE_DURATION  = 0.08;   // 8% for fade-in / fade-out
 
   function getCardState(index, progress) {
-    const start = 0.06 + (index * (SLIDE_DURATION - FADE_DURATION));
+    const start = index * (SLIDE_DURATION - FADE_DURATION);
     const end   = start + SLIDE_DURATION;
     const holdStart = start + FADE_DURATION;
     const holdEnd   = end - FADE_DURATION;
@@ -233,17 +233,17 @@ function initSkillsScrollShow() {
       }
     });
 
-    // Exit animation: last 15% of scroll
-    const exitProgress = Math.max(0, (progress - 0.78) / 0.15);
+    // Exit animation: last 15% of scroll (starting at progress 0.80)
+    const exitProgress = Math.max(0, (progress - 0.80) / 0.15);
     if (exitProgress > 0) {
       pinWrapper.classList.add('skills-exiting');
     } else {
       pinWrapper.classList.remove('skills-exiting');
     }
 
-    // Active state: dim projects only when the user is inside the skills section and before the exit transition starts
+    // Active state: dim projects only when the user is inside the skills section and before the exit transition starts (before 0.80)
     const isInsideSkills = scrolled >= 0 && scrolled <= scrollable;
-    if (isInsideSkills && progress < 0.78) {
+    if (isInsideSkills && progress < 0.80) {
       document.body.classList.add('skills-active');
     } else {
       document.body.classList.remove('skills-active');
