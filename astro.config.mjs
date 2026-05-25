@@ -6,6 +6,9 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://anjanadulan.github.io',
   output: 'static',
+  devToolbar: {
+    enabled: false,
+  },
 
   build: {
     format: 'file',
