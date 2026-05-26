@@ -4,45 +4,109 @@ import projectDataRaw from '../data/projects.json';
 import { ClientRouter } from 'astro:transitions';
 import { Image } from 'astro:assets';
 import logoImage from '../assets/aw-logo.png';
+import Analytics from '@vercel/analytics/astro';
 
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  canonical?: string;
   isProjectsPage?: boolean;
 }
 
 const {
-  title = "Anjana Wijerathna | Software Engineer",
-  description = "Portfolio of Anjana Wijerathna — Software Engineer specializing in enterprise Java applications, IoT systems, and modern web development.",
+  title = "Anjana Wijerathna | Software Engineer & IoT Engineer",
+  description = "Portfolio of Anjana Wijerathna — Software Engineer specializing in enterprise Java applications, IoT systems, and modern web development. Based in Sri Lanka.",
+  image = "https://anjanadulan.vercel.app/og.png",
+  canonical = "https://anjanadulan.vercel.app/",
   isProjectsPage = false
 } = Astro.props;
 
-const homeUrl = isProjectsPage ? "index.html#home" : "#home";
-const aboutUrl = isProjectsPage ? "index.html#about" : "#about";
-const skillsUrl = isProjectsPage ? "index.html#skills" : "#skills";
-const projectsUrl = isProjectsPage ? "#projects" : "projects.html";
-const contactUrl = isProjectsPage ? "index.html#contact" : "#contact";
+const siteUrl   = "https://anjanadulan.vercel.app";
+const siteName  = "Anjana Wijerathna — Portfolio";
+
+const homeUrl     = isProjectsPage ? "/#home"     : "#home";
+const aboutUrl    = isProjectsPage ? "/#about"    : "#about";
+const skillsUrl   = isProjectsPage ? "/#skills"   : "#skills";
+const projectsUrl = isProjectsPage ? "/#projects" : "#projects";
+const contactUrl  = isProjectsPage ? "/#contact"  : "#contact";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Anjana Wijerathna",
+  "url": siteUrl,
+  "image": image,
+  "jobTitle": "Software Engineer",
+  "description": description,
+  "email": "mailto:dulannimsara453@gmail.com",
+  "sameAs": [
+    "https://github.com/anjanadulan",
+    "https://www.linkedin.com/in/anjanawijerathna/",
+    "https://www.instagram.com/__anj.u/"
+  ],
+  "knowsAbout": [
+    "Java", "Spring Boot", "IoT Engineering", "Web Development",
+    "React", "Astro", "Node.js", "Embedded Systems"
+  ]
+};
 ---
 
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <!-- ═══ Primary SEO ═══ -->
   <title>{title}</title>
-  <meta name="description" content={description}>
-  <meta name="theme-color" content="#0A0A0A">
+  <meta name="description"  content={description}>
+  <meta name="author"       content="Anjana Wijerathna">
+  <meta name="keywords"     content="Anjana Wijerathna, Software Engineer, IoT Engineer, Java Developer, Spring Boot, Portfolio, Sri Lanka, Web Developer, Embedded Systems">
+  <meta name="robots"       content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="canonical"     href={canonical}>
 
-  <meta property="og:title" content={title}>
+  <!-- ═══ Open Graph (Facebook, LinkedIn, WhatsApp, Discord) ═══ -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content={canonical}>
+  <meta property="og:site_name"   content={siteName}>
+  <meta property="og:locale"      content="en_US">
+  <meta property="og:title"       content={title}>
   <meta property="og:description" content={description}>
-  <meta property="og:image" content="https://anjanadulan.github.io/profile.jpg">
-  <meta property="og:url" content="https://anjanadulan.github.io">
-  <meta property="og:type" content="website">
+  <meta property="og:image"       content={image}>
+  <meta property="og:image:width"  content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt"    content="Anjana Wijerathna — Software Engineer Portfolio">
 
-  <link rel="icon" type="image/png" href="favicon.png">
+  <!-- ═══ Twitter / X Card ═══ -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@anjanadulan">
+  <meta name="twitter:creator"     content="@anjanadulan">
+  <meta name="twitter:title"       content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image"       content={image}>
+  <meta name="twitter:image:alt"   content="Anjana Wijerathna — Software Engineer Portfolio">
+
+  <!-- ═══ Browser & PWA hints ═══ -->
+  <meta name="theme-color"                content="#0A0A0A" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color"                content="#F5F5F5" media="(prefers-color-scheme: light)">
+  <meta name="color-scheme"               content="dark light">
+  <meta name="apple-mobile-web-app-title" content="Anjana W.">
+  <meta name="apple-mobile-web-app-capable"           content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style"  content="black-translucent">
+  <meta name="mobile-web-app-capable"    content="yes">
+
+  <!-- ═══ Icons ═══ -->
+  <link rel="icon"             type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180"  href="/favicon.png">
+
+  <!-- ═══ Fonts ═══ -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- ═══ JSON-LD Structured Data ═══ -->
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
   <ClientRouter />
 </head>
@@ -66,33 +130,41 @@ const contactUrl = isProjectsPage ? "index.html#contact" : "#contact";
 
   <nav class="nav">
     <div class="container nav-inner">
-      <a href={homeUrl} class="logo">
-        <Image src={logoImage} alt="AW Logo" class="logo-img" width={36} height={36} loading="eager" />
-      </a>
       <div class="nav-links">
+        <a href={homeUrl}>Home</a>
         <a href={aboutUrl}>About</a>
         <a href={skillsUrl}>Skills</a>
         <a href={projectsUrl}>Projects</a>
         <a href={contactUrl}>Contact</a>
       </div>
-      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" type="button">
-        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="4"></circle>
-          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
-        </svg>
-        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
-      </button>
-      <button id="mobile-toggle" class="mobile-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu" type="button">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-      </button>
+      <div class="nav-right">
+        <div class="available-status-pill">
+          <span class="status-dot"></span>
+          <span class="status-text">Available</span>
+        </div>
+        <a href={homeUrl} class="logo" aria-label="Home">
+          <Image src={logoImage} alt="AW Logo" class="logo-img" width={32} height={32} loading="eager" />
+        </a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" type="button">
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+          </svg>
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <button id="mobile-toggle" class="mobile-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu" type="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
     </div>
     <div id="mobile-menu" class="mobile-menu hidden">
+      <a href={homeUrl}>Home</a>
       <a href={aboutUrl}>About</a>
       <a href={skillsUrl}>Skills</a>
       <a href={projectsUrl}>Projects</a>
@@ -133,6 +205,8 @@ const contactUrl = isProjectsPage ? "index.html#contact" : "#contact";
   </script>
 
   <script src="../scripts/portfolio.js"></script>
+
+  <Analytics />
 
 </body>
 </html>

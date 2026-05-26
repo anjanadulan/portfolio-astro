@@ -2,17 +2,17 @@
 ---
 <div
   id="project-modal"
-  class="modal-overlay fixed inset-0 z-[9999] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300"
+  class="modal-overlay fixed inset-0 z-[9999] flex items-center justify-center p-2 sm:p-4 opacity-0 pointer-events-none transition-all duration-300"
   style="background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);"
 >
   <div
-    class="modal-content relative w-full max-w-2xl max-h-[85vh] overflow-y-auto p-6 sm:p-8 rounded-2xl border border-white/10 shadow-2xl scale-95 transition-transform duration-300"
-    style="background: var(--card-strong); border: 1px solid var(--border); border-radius: var(--radius-xl);"
+    class="modal-content relative w-full max-w-2xl max-h-[85vh] overflow-y-auto p-4 sm:p-6 md:p-8 rounded-2xl border border-white/10 shadow-2xl scale-95 transition-transform duration-300"
+    style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); box-shadow: var(--glass-shadow);"
   >
     <button
       id="close-modal"
-      class="modal-close absolute top-4 right-4 p-2 rounded-lg border transition-all duration-200 z-10"
-      style="color: var(--text-muted); background: var(--surface); border-color: var(--border);"
+      class="modal-close absolute top-3 right-3 rounded-lg border transition-all duration-200 z-10"
+      style="color: var(--text-secondary); background: var(--glass-bg); border-color: var(--glass-border); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); min-width: 44px; min-height: 44px; display: grid; place-items: center;"
       aria-label="Close details modal"
     >
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -24,3 +24,4 @@
     <div id="modal-body" class="relative"></div>
   </div>
 </div>
+
