@@ -5,6 +5,7 @@ import { ClientRouter } from 'astro:transitions';
 import { Image } from 'astro:assets';
 import logoImage from '../assets/aw-logo.png';
 import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
 
 interface Props {
   title?: string;
@@ -207,6 +208,7 @@ const jsonLd = {
   <script src="../scripts/portfolio.js"></script>
 
   <Analytics />
+  <SpeedInsights />
 
 </body>
 </html>
