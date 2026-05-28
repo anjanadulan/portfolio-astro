@@ -15,15 +15,15 @@ interface Props {
 }
 
 const {
-  title = "Anjana Wijerathna | Software Engineer & IoT Engineer",
-  description = "Portfolio of Anjana Wijerathna — Software Engineer specializing in enterprise Java applications, IoT systems, and modern web development. Based in Sri Lanka.",
+  title = "Anjana Wijerathna (Anjana Dulan Nimsara) | Software Engineer & IoT Engineer",
+  description = "Official portfolio of Anjana Wijerathna (Anjana Dulan Nimsara) — Software Engineer and IoT Engineer specializing in enterprise Java (Spring Boot) applications, IoT prototypes, and modern web development.",
   image = "https://anjanadulan.vercel.app/og.png",
   canonical = "https://anjanadulan.vercel.app/",
   isProjectsPage = false
 } = Astro.props;
 
 const siteUrl   = "https://anjanadulan.vercel.app";
-const siteName  = "Anjana Wijerathna — Portfolio";
+const siteName  = "Anjana Wijerathna (Anjana Dulan Nimsara) — Portfolio";
 
 const homeUrl     = isProjectsPage ? "/#home"     : "#home";
 const aboutUrl    = isProjectsPage ? "/#about"    : "#about";
@@ -35,6 +35,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Anjana Wijerathna",
+  "alternateName": ["Anjana Dulan Nimsara", "Anjana Dulan", "Anjana Nimsara"],
   "url": siteUrl,
   "image": image,
   "jobTitle": "Software Engineer",
@@ -63,7 +64,7 @@ const jsonLd = {
   <title>{title}</title>
   <meta name="description"  content={description}>
   <meta name="author"       content="Anjana Wijerathna">
-  <meta name="keywords"     content="Anjana Wijerathna, Software Engineer, IoT Engineer, Java Developer, Spring Boot, Portfolio, Sri Lanka, Web Developer, Embedded Systems">
+  <meta name="keywords"     content="Anjana Wijerathna, Anjana Dulan Nimsara, Anjana Dulan, Anjana Nimsara, Dulan Nimsara, Software Engineer, IoT Engineer, Java Developer, Spring Boot, Portfolio, Sri Lanka, Web Developer, Embedded Systems">
   <meta name="robots"       content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical"     href={canonical}>
 
