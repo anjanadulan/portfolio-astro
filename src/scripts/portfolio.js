@@ -672,8 +672,8 @@ function initAll() {
 }
 
 async function initVanta() {
-  const heroEl = document.getElementById('home');
-  if (!heroEl || prefersReducedMotion) return;
+  const bgEl = document.getElementById('vanta-bg');
+  if (!bgEl || prefersReducedMotion) return;
 
   // Dynamically load p5.js if not already present
   if (!window.p5) {
@@ -705,7 +705,7 @@ async function initVanta() {
 
   try {
     vantaInstance = window.VANTA.TRUNK({
-      el: '#home',
+      el: '#vanta-bg',
       mouseControls: true,
       touchControls: true,
       gyroControls: false,
@@ -730,14 +730,14 @@ async function initVanta() {
 }
 
 function handleScrollVanta() {
-  const heroEl = document.getElementById('home');
-  if (!heroEl || !vantaInstance) return;
+  const bgEl = document.getElementById('vanta-bg');
+  if (!bgEl || !vantaInstance) return;
 
   const scrollY = window.scrollY;
-  const heroHeight = heroEl.offsetHeight;
-  const scrollPercent = Math.min(1, Math.max(0, scrollY / heroHeight));
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollPercent = maxScroll > 0 ? Math.min(1, Math.max(0, scrollY / maxScroll)) : 0;
 
-  // 1. Chaos interpolation: 0.50 at top, 10.0 at bottom of hero fold
+  // 1. Chaos interpolation: 0.50 at top, 10.0 at bottom of entire page
   const currentChaos = 0.50 + scrollPercent * (10.0 - 0.50);
   
   if (typeof vantaInstance.setOptions === 'function') {
@@ -747,7 +747,7 @@ function handleScrollVanta() {
   }
 
   // 2. Alignment translation shift: shift from left to right as scroll increases
-  const canvasEl = heroEl.querySelector('canvas.vanta-canvas');
+  const canvasEl = bgEl.querySelector('canvas.vanta-canvas');
   if (canvasEl) {
     const shiftX = (scrollPercent * 60) - 30; // translates from -30px to +30px
     canvasEl.style.transform = `translateX(${shiftX}px) scale(1.15)`;

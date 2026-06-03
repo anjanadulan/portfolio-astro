@@ -144,7 +144,7 @@ body::after {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: -2;
   pointer-events: none;
   --x-0: 93%;
   --y-0: 63%;
@@ -2371,10 +2371,19 @@ body.skills-active #projects .extra-projects {
 @property --s-start-9 { syntax: '<percentage>'; inherits: false; initial-value: 8.392121895570533% }
 @property --s-end-9 { syntax: '<percentage>'; inherits: false; initial-value: 31.77166380372925% }
 
-/* Vanta Trunk Canvas Blur & Transformation Styles */
-#home canvas.vanta-canvas {
-  filter: blur(6px);
-  opacity: 0.55;
+/* Fullscreen Fixed Vanta Trunk Background Canvas Styles */
+.vanta-bg-container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.vanta-bg-container canvas.vanta-canvas {
+  filter: blur(8px);
+  opacity: 0.35; /* Keep it subtle across sections */
   transition: opacity 0.3s ease, filter 0.3s ease;
   will-change: transform;
 }
