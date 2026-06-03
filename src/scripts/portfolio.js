@@ -668,7 +668,19 @@ function initAll() {
   initPageLoader();
   initBackToTop();
   initModals();
-  initVanta();
+
+  // Defer Vanta background Canvas and large p5.js scripts to boost PageSpeed metrics
+  let vantaTriggered = false;
+  const triggerVanta = () => {
+    if (vantaTriggered) return;
+    vantaTriggered = true;
+    initVanta();
+  };
+  registerListener(window, 'scroll', triggerVanta, { passive: true });
+  registerListener(window, 'mousemove', triggerVanta, { passive: true });
+  registerListener(window, 'touchstart', triggerVanta, { passive: true });
+  registerTimeout(triggerVanta, 1500);
+
   initCarousel();
 }
 

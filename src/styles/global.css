@@ -40,6 +40,101 @@
   --font-mono: "Geist Mono", monospace;
 }
 
+/* ═══ Houdini Custom Properties for Animated Gradient Borders ═══ */
+@property --x-0 {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 1%;
+}
+
+@property --y-0 {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 1%;
+}
+
+@property --t-0 {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 27px;
+}
+
+@property --s-start-0 {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 10%;
+}
+
+@property --s-end-0 {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 30%;
+}
+
+@property --c-0 {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: hsla(359, 100%, 50%, 1);
+}
+
+@property --b {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@keyframes ani-your_css_selector_here {
+  0% {
+    --x-0: 1%;
+    --y-0: 1%;
+    --t-0: 27px;
+    --s-start-0: 10%;
+    --s-end-0: 30%;
+    --c-0: hsla(359, 100%, 50%, 1);
+    --b: 0px;
+  }
+
+  25% {
+    --x-0: 99%;
+    --y-0: 1%;
+    --t-0: 9px;
+    --s-start-0: 10%;
+    --s-end-0: 30%;
+    --c-0: hsla(311, 100%, 50%, 1);
+    --b: 15px;
+  }
+
+  50% {
+    --x-0: 99%;
+    --y-0: 99%;
+    --t-0: 24px;
+    --s-start-0: 10%;
+    --s-end-0: 30%;
+    --c-0: hsla(240, 100%, 50%, 1);
+    --b: 0px;
+  }
+
+  75% {
+    --x-0: 1%;
+    --y-0: 99%;
+    --t-0: 11px;
+    --s-start-0: 10%;
+    --s-end-0: 30%;
+    --c-0: hsla(227, 100%, 1%, 1);
+    --b: 15px;
+  }
+
+  100% {
+    --x-0: 1%;
+    --y-0: 1%;
+    --t-0: 26px;
+    --s-start-0: 10%;
+    --s-end-0: 30%;
+    --c-0: hsla(0, 100%, 50%, 1);
+    --b: 0px;
+  }
+}
+
 :root {
   color-scheme: dark;
   --ink: #0A0A0A;
@@ -1036,29 +1131,36 @@ section {
   -webkit-backdrop-filter: blur(var(--glass-blur));
   box-shadow: var(--glass-shadow);
   transition: transform 200ms var(--ease-out), box-shadow 200ms ease, background 200ms ease;
+  overflow: visible;
+  z-index: 1;
 }
 
-.stat-item::before {
+.stat-item::after {
   content: "";
   position: absolute;
-  inset: 0;
-  border-radius: 16px;
-  padding: 1px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  z-index: 1;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  --x-0: 1%;
+  --y-0: 1%;
+  --t-0: 27px;
+  --c-0: hsla(359, 100%, 50%, 1);
+  background-color: hsla(0, 0, 0, 0);
+  background-image: radial-gradient(circle at var(--x-0) var(--y-0), var(--c-0) var(--s-start-0), transparent var(--s-end-0));
+  animation: ani-your_css_selector_here 10s linear infinite normal;
+  filter: blur(var(--b));
+  background-blend-mode: normal;
+  will-change: transform, opacity;
+  contain: paint;
   opacity: 0;
   transition: opacity 400ms ease;
 }
 
-.stat-item.visible::before {
+.stat-item.visible::after {
   opacity: 0.4;
 }
 
-.stat-item:hover::before {
+.stat-item:hover::after {
   opacity: 1;
 }
 
@@ -1129,14 +1231,11 @@ section {
   width: min(100%, 680px);
   margin-inline: auto;
   min-height: 380px;
-  padding: clamp(1.5rem, 3vw, 2rem);
+  padding: 0;
   border-radius: 16px;
-  border: 1px solid var(--glass-border);
-  background: #0c0c0c99;
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  box-shadow: var(--glass-shadow);
-  overflow: hidden;
+  border: none;
+  background: transparent;
+  overflow: visible;
   margin-top: 2rem;
 }
 
@@ -1148,8 +1247,39 @@ section {
   opacity: 0;
   pointer-events: none;
   transform: translateY(20px);
-  transition: opacity 500ms ease, transform 500ms var(--ease-out);
+  transition: opacity 500ms ease, transform 500ms var(--ease-out), z-index 500ms ease;
   padding-top: 2rem;
+
+  /* Glassmorphism background and borders */
+  border-radius: 16px;
+  background: #0c0c0c99;
+  border: 1px solid transparent;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--glass-shadow);
+  overflow: visible;
+  z-index: 1;
+}
+
+.skill-detail-card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  --x-0: 1%;
+  --y-0: 1%;
+  --t-0: 27px;
+  --c-0: hsla(359, 100%, 50%, 1);
+  background-color: hsla(0, 0, 0, 0);
+  background-image: radial-gradient(circle at var(--x-0) var(--y-0), var(--c-0) var(--s-start-0), transparent var(--s-end-0));
+  animation: ani-your_css_selector_here 10s linear infinite normal;
+  filter: blur(var(--b));
+  background-blend-mode: normal;
+  will-change: transform, opacity;
+  contain: paint;
+  opacity: 0;
+  transition: opacity 500ms ease;
 }
 
 .skill-detail-card.active {
@@ -1157,6 +1287,7 @@ section {
   pointer-events: auto;
   transform: translateY(0);
   padding-bottom: 2rem;
+  z-index: 2;
 }
 
 .skill-detail-card h3 {
@@ -1683,6 +1814,43 @@ body.skills-active #projects .extra-projects {
   margin-inline: auto;
   padding: clamp(1.5rem, 4vw, 2.5rem);
   text-align: center;
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+  border: 1px solid transparent !important;
+}
+
+.contact-content::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  --x-0: 1%;
+  --y-0: 1%;
+  --t-0: 27px;
+  --c-0: hsla(359, 100%, 50%, 1);
+  background-color: hsla(0, 0, 0, 0);
+  background-image: radial-gradient(circle at var(--x-0) var(--y-0), var(--c-0) var(--s-start-0), transparent var(--s-end-0));
+  animation: ani-your_css_selector_here 10s linear infinite normal;
+  filter: blur(var(--b));
+  background-blend-mode: normal;
+  will-change: transform, opacity;
+  contain: paint;
+  opacity: 0.8;
+  transition: opacity 300ms ease;
+}
+
+.contact-content:hover::after {
+  opacity: 1;
+}
+
+.contact-content:hover {
+  border-color: transparent !important;
+}
+
+.light .contact-content:hover {
+  border-color: transparent !important;
 }
 
 .contact-text {
@@ -2127,15 +2295,21 @@ body.skills-active #projects .extra-projects {
   }
 
   .skill-detail-card {
-    position: static;
+    position: relative;
     padding: clamp(1.5rem, 3vw, 2rem);
     margin-bottom: 1.5rem;
     opacity: 1 !important;
     pointer-events: auto;
     transform: none !important;
-    border: 1px solid var(--border);
+    border: 1px solid transparent;
     border-radius: var(--radius-lg);
     background: var(--card);
+    overflow: visible;
+    z-index: 1;
+  }
+
+  .skill-detail-card::after {
+    opacity: 1 !important;
   }
 
   .skill-detail-card:last-child {
