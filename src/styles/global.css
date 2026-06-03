@@ -2068,16 +2068,98 @@ body.skills-active #projects .extra-projects {
   pointer-events: none;
 }
 
-.loader-spinner {
-  width: 32px;
-  height: 32px;
-  border: 2px solid var(--border);
-  border-top-color: var(--accent);
-  border-radius: 50%;
-  animation: spin 0.6s linear infinite;
+/* Custom Scoped Letter Loader Styles */
+.page-loader .absolute {
+  position: absolute;
 }
 
-@keyframes spin { to { transform: rotate(360deg); } }
+.loader .inline-block {
+  display: inline-block;
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0.25em 0;
+}
+
+.loader .w-2 {
+  width: 0.5em;
+}
+
+/* For A and J: Traces and erases the paths smoothly */
+.loader .dash {
+  animation: dashArray 2s ease-in-out infinite,
+    dashOffset 2s linear infinite;
+}
+
+/* For N: Handles the erratic spinning and color-shifting transition */
+.loader .spin {
+  animation: spinDashArray 2s ease-in-out infinite,
+    spinLetter 4s ease-in-out infinite,
+    dashOffset 2s linear infinite;
+  transform-origin: 32px 32px; /* Forces exact center alignment for the 64x64 canvas */
+}
+
+@keyframes dashArray {
+  0% {
+    stroke-dasharray: 0 360;
+  }
+  50% {
+    stroke-dasharray: 180 180;
+  }
+  100% {
+    stroke-dasharray: 360 0;
+  }
+}
+
+@keyframes spinDashArray {
+  0% {
+    stroke-dasharray: 360 0;
+  }
+  50% {
+    stroke-dasharray: 90 270;
+  }
+  100% {
+    stroke-dasharray: 360 0;
+  }
+}
+
+@keyframes dashOffset {
+  0% {
+    stroke-dashoffset: 360;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Optimized rotation for straight-line letters like 'N' */
+@keyframes spinLetter {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader .dash, 
+.loader .spin {
+  /* Adds a subtle glow so thin lines remain crisp and highly visible */
+  filter: drop-shadow(0px 0px 1px rgba(255, 30, 39, 0.6)); 
+}
 
 /* ═══════════════════════════════════════════════════════
    BACK TO TOP — Micro-interaction
