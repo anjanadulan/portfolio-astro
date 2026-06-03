@@ -489,9 +489,13 @@ function initSmoothAnchors() {
 
 function initPageLoader() {
   const loader = document.getElementById('page-loader');
+  const startTime = Date.now();
+  const targetDuration = 4500; // Keep loading screen for exactly 4.5s
+
   if (!loader) {
     document.body.classList.add('loaded');
     initVanta();
+    initTypewriter();
     return;
   }
 
@@ -499,14 +503,17 @@ function initPageLoader() {
   const hideLoader = () => {
     if (loaderHidden) return;
     loaderHidden = true;
+    
+    loader.classList.add('hidden');
+    // Add loaded class to body and start typewriter after the loader has fully faded out (300ms transition)
     setTimeout(() => {
-      loader.classList.add('hidden');
       document.body.classList.add('loaded');
-    }, 200);
+      initTypewriter();
+    }, 300);
   };
 
-  // Safely limit loading screen time to 4.5 seconds max
-  const safetyTimeoutId = registerTimeout(hideLoader, 4500);
+  // Safely limit loading screen time to 6 seconds max
+  const safetyTimeoutId = registerTimeout(hideLoader, 6000);
 
   const checkAndHide = async () => {
     const bgEl = document.getElementById('vanta-bg');
@@ -520,7 +527,10 @@ function initPageLoader() {
       }
     }
 
-    hideLoader();
+    const elapsed = Date.now() - startTime;
+    const remaining = Math.max(0, targetDuration - elapsed);
+
+    registerTimeout(hideLoader, remaining);
   };
 
   if (document.readyState === 'complete') {
@@ -689,7 +699,6 @@ function initAll() {
   initScrollReveals();
   initNavbar();
   initScrollSpy();
-  initTypewriter();
   initPageLoader();
   initBackToTop();
   initModals();

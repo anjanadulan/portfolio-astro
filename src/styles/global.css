@@ -856,7 +856,7 @@ section {
   opacity: 0;
 }
 .loaded .hero-content {
-  animation: hero-slide-left 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: hero-slide-left 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Staggered hero entrance */
@@ -972,7 +972,7 @@ section {
   opacity: 0;
 }
 .loaded .hero-image-wrapper {
-  animation: hero-slide-right 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: hero-slide-right 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .hero-image-container {
