@@ -1,6 +1,7 @@
 const root = document.documentElement;
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let scrollIdleTimer = null;
+let vantaInstance = null;
 
 // Astro ClientRouter event listener and timeout registry
 if (!window.__portfolioRegistry) {
@@ -35,6 +36,11 @@ function cleanupAll() {
     scrollIdleTimer = null;
   }
 
+  if (vantaInstance) {
+    vantaInstance.destroy();
+    vantaInstance = null;
+  }
+
   // Remove event listeners
   if (window.__portfolioRegistry.listeners) {
     window.__portfolioRegistry.listeners.forEach(({ target, type, listener, options }) => {
@@ -65,6 +71,14 @@ function setTheme(theme) {
   const toggle = document.getElementById('theme-toggle');
   toggle?.classList.toggle('light-mode', isLight);
   toggle?.setAttribute('aria-label', isLight ? 'Switch to dark theme' : 'Switch to light theme');
+
+  // Dynamically update Vanta Net accent colors on theme toggle
+  if (window.VANTA && window.VANTA.NET && vantaInstance) {
+    const accentColor = isLight ? 0xe54b2a : 0xff5e3a;
+    vantaInstance.setOptions({
+      color: accentColor
+    });
+  }
 }
 
 function initTheme() {
@@ -654,6 +668,86 @@ function initAll() {
   initPageLoader();
   initBackToTop();
   initModals();
+  initVanta();
+}
+
+async function initVanta() {
+  const heroEl = document.getElementById('home');
+  if (!heroEl || prefersReducedMotion) return;
+
+  // Dynamically load Three.js if not already present
+  if (!window.THREE) {
+    try {
+      await loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js');
+    } catch (e) {
+      console.error('Failed to load Three.js CDN', e);
+      return;
+    }
+  }
+
+  // Dynamically load Vanta Net if not already present
+  if (!window.VANTA || !window.VANTA.NET) {
+    try {
+      await loadScript('https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js');
+    } catch (e) {
+      console.error('Failed to load Vanta.js Net CDN', e);
+      return;
+    }
+  }
+
+  if (vantaInstance) {
+    vantaInstance.destroy();
+    vantaInstance = null;
+  }
+
+  const isLight = document.documentElement.classList.contains('light');
+  const accentColor = isLight ? 0xe54b2a : 0xff5e3a;
+
+  try {
+    vantaInstance = window.VANTA.NET({
+      el: '#home',
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      color: accentColor,
+      backgroundColor: isLight ? 0xf5f5f5 : 0x0a0a0a,
+      backgroundAlpha: 0.0, // Transparent canvas: lets page mesh animations shine through!
+      points: 10.00,
+      maxDistance: 22.00,
+      spacing: 16.00
+    });
+  } catch (err) {
+    console.error('Vanta.js Net initialization failed', err);
+  }
+}
+
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    const existing = document.querySelector(`script[src="${src}"]`);
+    if (existing) {
+      if (existing.dataset.loaded === 'true') {
+        resolve();
+      } else {
+        existing.addEventListener('load', resolve);
+        existing.addEventListener('error', reject);
+      }
+      return;
+    }
+
+    const s = document.createElement('script');
+    s.src = src;
+    s.async = true;
+    s.onload = () => {
+      s.dataset.loaded = 'true';
+      resolve();
+    };
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
 }
 
 document.addEventListener('astro:page-load', initAll);
