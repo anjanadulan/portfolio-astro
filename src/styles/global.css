@@ -2382,7 +2382,7 @@ body.skills-active #projects .extra-projects {
   overflow: hidden;
 }
 .vanta-bg-container canvas.vanta-canvas {
-  filter: blur(8px);
+  filter: blur(0.5px);
   opacity: 0.35; /* Keep it subtle across sections */
   transition: opacity 0.3s ease, filter 0.3s ease;
   will-change: transform;

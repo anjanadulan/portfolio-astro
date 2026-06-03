@@ -701,7 +701,7 @@ async function initVanta() {
   }
 
   const isLight = document.documentElement.classList.contains('light');
-  const accentColor = isLight ? 0xe54b2a : 0xff5e3a;
+  const accentColor = isLight ? 0x000000 : 0xFF0000;
 
   try {
     vantaInstance = window.VANTA.TRUNK({
@@ -746,13 +746,7 @@ function handleScrollVanta() {
     });
   }
 
-  // 2. Alignment translation shift: shift from left to right as scroll increases
-  const canvasEl = bgEl.querySelector('canvas.vanta-canvas');
-  if (canvasEl) {
-    const shiftX = (scrollPercent * 60) - 30; // translates from -30px to +30px
-    canvasEl.style.transform = `translateX(${shiftX}px) scale(1.15)`;
-    canvasEl.style.transformOrigin = 'center center';
-  }
+  
 }
 
 function loadScript(src) {
