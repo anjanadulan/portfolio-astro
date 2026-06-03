@@ -853,10 +853,15 @@ section {
 
 .hero-content {
   max-width: 640px;
-  opacity: 0;
 }
-.loaded .hero-content {
-  animation: hero-slide-left 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+/* Initial states before page is loaded (JS will animate them using Anime.js) */
+body:not(.loaded) .hero-content > * {
+  opacity: 0;
+  transform: translateY(12px);
+}
+body:not(.loaded) .hero-image-wrapper {
+  opacity: 0;
 }
 
 /* Staggered hero entrance */
@@ -875,11 +880,6 @@ section {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   background: var(--accent-soft);
-  opacity: 0;
-  transform: translateY(12px);
-}
-.loaded .hero-label {
-  animation: fade-up 600ms 100ms var(--ease-out) forwards;
 }
 
 .hero-title {
@@ -888,11 +888,6 @@ section {
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 0.95;
-  opacity: 0;
-  transform: translateY(12px);
-}
-.loaded .hero-title {
-  animation: fade-up 600ms 180ms var(--ease-out) forwards;
 }
 
 .hero-tagline-wrapper {
@@ -906,11 +901,6 @@ section {
   font-family: var(--font-heading);
   font-size: clamp(1.2rem, 3vw, 1.8rem);
   font-weight: 600;
-  opacity: 0;
-  transform: translateY(12px);
-}
-.loaded .hero-tagline-wrapper {
-  animation: fade-up 600ms 260ms var(--ease-out) forwards;
 }
 
 .hero-tagline {
@@ -932,11 +922,6 @@ section {
   color: var(--text-secondary);
   font-size: clamp(0.95rem, 1.6vw, 1.05rem);
   line-height: 1.7;
-  opacity: 0;
-  transform: translateY(12px);
-}
-.loaded .hero-bio {
-  animation: fade-up 600ms 340ms var(--ease-out) forwards;
 }
 
 .hero-buttons {
@@ -944,11 +929,6 @@ section {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.75rem;
-  opacity: 0;
-  transform: translateY(12px);
-}
-.loaded .hero-buttons {
-  animation: fade-up 600ms 420ms var(--ease-out) forwards;
 }
 
 .hero-socials {
@@ -957,11 +937,6 @@ section {
   align-items: center;
   padding-top: 0.5rem;
   gap: 0.75rem;
-  opacity: 0;
-  transform: translateY(12px);
-}
-.loaded .hero-socials {
-  animation: fade-up 600ms 500ms var(--ease-out) forwards;
 }
 
 /* ── Hero Image ── */
@@ -969,10 +944,6 @@ section {
   position: relative;
   width: min(100%, 380px);
   justify-self: end;
-  opacity: 0;
-}
-.loaded .hero-image-wrapper {
-  animation: hero-slide-right 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .hero-image-container {

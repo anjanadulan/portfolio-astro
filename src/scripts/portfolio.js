@@ -493,7 +493,7 @@ function initPageLoader() {
   const targetDuration = 4500; // Keep loading screen for exactly 4.5s
 
   if (!loader) {
-    document.body.classList.add('loaded');
+    animateHero();
     initVanta();
     initTypewriter();
     return;
@@ -505,9 +505,9 @@ function initPageLoader() {
     loaderHidden = true;
     
     loader.classList.add('hidden');
-    // Add loaded class to body and start typewriter after the loader has fully faded out (300ms transition)
+    // Trigger Anime.js entrance animations and typewriter after loader has fully faded out (300ms transition)
     setTimeout(() => {
-      document.body.classList.add('loaded');
+      animateHero();
       initTypewriter();
     }, 300);
   };
@@ -538,6 +538,46 @@ function initPageLoader() {
   } else {
     registerListener(window, 'load', checkAndHide);
   }
+}
+
+function animateHero() {
+  if (typeof anime === 'undefined') {
+    document.body.classList.add('loaded');
+    return;
+  }
+
+  document.body.classList.add('loaded');
+
+  // Reset opacity/transform properties so anime.js can animate cleanly from zero
+  const heroContentChildren = document.querySelectorAll('.hero-content > *');
+  heroContentChildren.forEach(child => {
+    child.style.opacity = '0';
+  });
+  const heroImageWrapper = document.querySelector('.hero-image-wrapper');
+  if (heroImageWrapper) {
+    heroImageWrapper.style.opacity = '0';
+  }
+
+  // 1. Left side content slide in from left & fade up (staggered)
+  anime({
+    targets: '.hero-content > *',
+    translateX: [-80, 0],
+    translateY: [20, 0],
+    opacity: [0, 1],
+    easing: 'cubicBezier(0.16, 1, 0.3, 1)',
+    duration: 1200,
+    delay: anime.stagger(80)
+  });
+
+  // 2. Right side image slide in from right & fade in
+  anime({
+    targets: '.hero-image-wrapper',
+    translateX: [80, 0],
+    opacity: [0, 1],
+    easing: 'cubicBezier(0.16, 1, 0.3, 1)',
+    duration: 1200,
+    delay: 150
+  });
 }
 
 function initBackToTop() {
