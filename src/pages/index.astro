@@ -6,7 +6,7 @@ import { Image } from 'astro:assets';
 import profileImage from '../assets/profile.jpg';
 import ProjectModal from '../components/ProjectModal.astro';
 
-const featuredProjects = projects.slice(0, 3);
+const featuredProjects = projects.slice(0, 5);
 ---
 
 <Layout>
@@ -252,20 +252,42 @@ const featuredProjects = projects.slice(0, 3);
         <p class="section-subtitle">A curated collection of my most impactful work across web, enterprise, and IoT.</p>
       </div>
 
-      <div class="projects-grid">
-        {featuredProjects.map((p) => (
-          <ProjectCard
-            id={p.id}
-            title={p.title}
-            shortDesc={p.desc}
-            tech={p.tech}
-            bgGradient={p.bgGradient}
-            icon={p.icon}
-            github={p.github}
-            demo={p.demo}
-            showActions={true}
-          />
-        ))}
+      <!-- 3D Layered Carousel Wrapper -->
+      <div class="carousel-wrapper">
+        <div class="carousel-container" id="project-carousel">
+          <div class="carousel-track">
+            {featuredProjects.map((p, index) => (
+              <div class="carousel-item" data-index={index}>
+                <ProjectCard
+                  id={p.id}
+                  title={p.title}
+                  shortDesc={p.desc}
+                  tech={p.tech}
+                  bgGradient={p.bgGradient}
+                  icon={p.icon}
+                  github={p.github}
+                  demo={p.demo}
+                  showActions={true}
+                />
+              </div>
+            ))}
+          </div>
+
+          <!-- Navigation Controls -->
+          <button class="carousel-nav-btn prev-btn" id="carousel-prev" aria-label="Previous project">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          </button>
+          <button class="carousel-nav-btn next-btn" id="carousel-next" aria-label="Next project">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+
+          <!-- Indicators / Dots -->
+          <div class="carousel-dots">
+            {featuredProjects.map((_, index) => (
+              <button class="carousel-dot" data-index={index} aria-label={`Go to slide ${index + 1}`}></button>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div class="extra-projects">

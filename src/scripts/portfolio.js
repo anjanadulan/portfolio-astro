@@ -669,6 +669,7 @@ function initAll() {
   initBackToTop();
   initModals();
   initVanta();
+  initCarousel();
 }
 
 async function initVanta() {
@@ -772,6 +773,131 @@ function loadScript(src) {
     s.onerror = reject;
     document.head.appendChild(s);
   });
+}
+
+function initCarousel() {
+  const container = document.getElementById('project-carousel');
+  if (!container) return;
+
+  const items = container.querySelectorAll('.carousel-item');
+  const prevBtn = container.querySelector('#carousel-prev');
+  const nextBtn = container.querySelector('#carousel-next');
+  const dots = container.querySelectorAll('.carousel-dot');
+  const total = items.length;
+  if (total === 0) return;
+
+  let activeIndex = 0;
+  let isDragging = false;
+  let startX = 0;
+  let currentX = 0;
+  const swipeThreshold = 55; // min pixels to slide
+
+  function updateSlides() {
+    items.forEach((item, index) => {
+      // Clean up inline styles/position attributes
+      delete item.dataset.active;
+      delete item.dataset.position;
+
+      // Circular wrapping calculation
+      let diff = index - activeIndex;
+      if (diff < -Math.floor(total / 2)) diff += total;
+      if (diff > Math.floor(total / 2)) diff -= total;
+
+      if (diff === 0) {
+        item.dataset.active = "true";
+      } else if (diff === -1) {
+        item.dataset.position = "left";
+      } else if (diff === 1) {
+        item.dataset.position = "right";
+      } else {
+        item.dataset.position = "hidden";
+      }
+    });
+
+    // Update dots indicator active class
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle('active', idx === activeIndex);
+    });
+  }
+
+  function nextSlide() {
+    activeIndex = (activeIndex + 1) % total;
+    updateSlides();
+  }
+
+  function prevSlide() {
+    activeIndex = (activeIndex - 1 + total) % total;
+    updateSlides();
+  }
+
+  function goToSlide(index) {
+    activeIndex = index;
+    updateSlides();
+  }
+
+  // Button Listeners
+  if (prevBtn) registerListener(prevBtn, 'click', prevSlide);
+  if (nextBtn) registerListener(nextBtn, 'click', nextSlide);
+
+  // Dot Indicator Listeners
+  dots.forEach((dot, idx) => {
+    registerListener(dot, 'click', () => goToSlide(idx));
+  });
+
+  // Swipe/Sweep Mouse & Touch gesture support
+  function onDragStart(e) {
+    // Only drag on non-interactive inputs
+    if (e.target.closest('a') || e.target.closest('button') && e.target !== prevBtn && e.target !== nextBtn) return;
+    isDragging = true;
+    startX = getPositionX(e);
+    container.style.cursor = 'grabbing';
+  }
+
+  function onDragMove(e) {
+    if (!isDragging) return;
+    currentX = getPositionX(e);
+    
+    // Prevent default scroll behavior if swiping horizontally
+    const diffX = Math.abs(currentX - startX);
+    if (diffX > 10 && e.cancelable) {
+      e.preventDefault();
+    }
+  }
+
+  function onDragEnd() {
+    if (!isDragging) return;
+    isDragging = false;
+    container.style.cursor = 'grab';
+
+    const diffX = currentX - startX;
+    if (Math.abs(diffX) > swipeThreshold) {
+      if (diffX > 0) {
+        prevSlide();
+      } else {
+        nextSlide();
+      }
+    }
+    startX = 0;
+    currentX = 0;
+  }
+
+  function getPositionX(e) {
+    return e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+  }
+
+  // Bind Mouse drag
+  registerListener(container, 'mousedown', onDragStart);
+  registerListener(window, 'mousemove', onDragMove);
+  registerListener(window, 'mouseup', onDragEnd);
+
+  // Bind Touch swipe
+  registerListener(container, 'touchstart', onDragStart, { passive: true });
+  registerListener(container, 'touchmove', onDragMove, { passive: false });
+  registerListener(container, 'touchend', onDragEnd);
+
+  // Init layout
+  container.style.cursor = 'grab';
+  updateSlides();
 }
 
 document.addEventListener('astro:page-load', initAll);

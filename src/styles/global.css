@@ -1262,12 +1262,14 @@ section {
 /* Projects entrance when skills is active/exiting */
 #projects .section-header,
 #projects .projects-grid,
+#projects .carousel-wrapper,
 #projects .extra-projects {
   transition: opacity 600ms ease, transform 600ms var(--ease-out);
 }
 
 body.skills-active #projects .section-header,
 body.skills-active #projects .projects-grid,
+body.skills-active #projects .carousel-wrapper,
 body.skills-active #projects .extra-projects {
   opacity: 0.25;
   transform: translateY(30px);
@@ -1283,6 +1285,174 @@ body.skills-active #projects .extra-projects {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.25rem;
   margin-top: 2.5rem;
+}
+
+/* --- PROJECTS CAROUSEL SYSTEM --- */
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  padding-block: 1rem 3rem;
+  overflow: visible;
+  margin-top: 1.5rem;
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  height: 480px;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.carousel-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+.carousel-item {
+  position: absolute;
+  width: min(440px, 85vw);
+  height: auto;
+  border-radius: var(--radius-lg);
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), 
+              opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), 
+              filter 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+              z-index 0.6s step-end;
+  will-change: transform, opacity, filter;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  filter: blur(4px);
+}
+
+.carousel-item .project-card {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.carousel-item[data-active="true"] {
+  opacity: 1;
+  z-index: 10;
+  pointer-events: auto;
+  filter: blur(0px);
+  transform: translate3d(0, 0, 0) scale(1.03);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+}
+
+.carousel-item[data-position="left"] {
+  opacity: 0.35;
+  z-index: 5;
+  pointer-events: none;
+  filter: blur(3px);
+  transform: translate3d(calc(-1 * var(--translate-x)), 0, -120px) scale(0.85);
+}
+
+.carousel-item[data-position="right"] {
+  opacity: 0.35;
+  z-index: 5;
+  pointer-events: none;
+  filter: blur(3px);
+  transform: translate3d(var(--translate-x), 0, -120px) scale(0.85);
+}
+
+:root {
+  --translate-x: 280px;
+}
+@media (max-width: 768px) {
+  :root {
+    --translate-x: 170px;
+  }
+  .carousel-container {
+    height: 520px;
+  }
+}
+@media (max-width: 480px) {
+  :root {
+    --translate-x: 105px;
+  }
+  .carousel-container {
+    height: 540px;
+  }
+}
+
+.carousel-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  color: var(--text-secondary);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.2s ease;
+  box-shadow: var(--glass-shadow);
+}
+.carousel-nav-btn:hover {
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+.carousel-nav-btn:active {
+  transform: translateY(-50%) scale(0.92);
+}
+.prev-btn {
+  left: -24px;
+}
+.next-btn {
+  right: -24px;
+}
+
+@media (max-width: 768px) {
+  .prev-btn { left: 4px; }
+  .next-btn { right: 4px; }
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 20;
+}
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+.carousel-dot:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+.carousel-dot.active {
+  background: var(--accent);
+  width: 24px;
+  border-radius: 99px;
+  box-shadow: 0 0 8px var(--accent-glow);
 }
 
 /* Stagger project cards */
