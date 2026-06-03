@@ -490,7 +490,8 @@ function initSmoothAnchors() {
 function initPageLoader() {
   const loader = document.getElementById('page-loader');
   const startTime = Date.now();
-  const targetDuration = 2500; // Keep loading screen for exactly 4.5s
+  const isMobile = window.innerWidth < 768 || window.matchMedia('(max-width: 768px)').matches;
+  const targetDuration = isMobile ? 1200 : 4500; // Keep loading screen for exactly 1.2s on mobile, 4.5s on desktop
 
   if (!loader) {
     animateHero();
@@ -517,7 +518,7 @@ function initPageLoader() {
 
   const checkAndHide = async () => {
     const bgEl = document.getElementById('vanta-bg');
-    const needsVanta = bgEl && !prefersReducedMotion && !vantaInstance;
+    const needsVanta = bgEl && !prefersReducedMotion && !isMobile && !vantaInstance;
 
     if (needsVanta) {
       try {
@@ -747,7 +748,8 @@ function initAll() {
 
 async function initVanta() {
   const bgEl = document.getElementById('vanta-bg');
-  if (!bgEl || prefersReducedMotion) return;
+  const isMobile = window.innerWidth < 768 || window.matchMedia('(max-width: 768px)').matches;
+  if (!bgEl || prefersReducedMotion || isMobile) return;
 
   // Dynamically load p5.js if not already present
   if (!window.p5) {
