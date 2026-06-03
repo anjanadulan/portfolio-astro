@@ -490,7 +490,7 @@ function initSmoothAnchors() {
 function initPageLoader() {
   const loader = document.getElementById('page-loader');
   const startTime = Date.now();
-  const targetDuration = 4500; // Keep loading screen for exactly 4.5s
+  const targetDuration = 2500; // Keep loading screen for exactly 4.5s
 
   if (!loader) {
     animateHero();
