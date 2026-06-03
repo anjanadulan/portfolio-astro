@@ -1,6 +1,7 @@
 const root = document.documentElement;
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let scrollIdleTimer = null;
+let vantaInstance = null;
 
 // Astro ClientRouter event listener and timeout registry
 if (!window.__portfolioRegistry) {
@@ -35,6 +36,11 @@ function cleanupAll() {
     scrollIdleTimer = null;
   }
 
+  if (vantaInstance) {
+    vantaInstance.destroy();
+    vantaInstance = null;
+  }
+
   // Remove event listeners
   if (window.__portfolioRegistry.listeners) {
     window.__portfolioRegistry.listeners.forEach(({ target, type, listener, options }) => {
@@ -65,6 +71,14 @@ function setTheme(theme) {
   const toggle = document.getElementById('theme-toggle');
   toggle?.classList.toggle('light-mode', isLight);
   toggle?.setAttribute('aria-label', isLight ? 'Switch to dark theme' : 'Switch to light theme');
+
+  // Dynamically update Vanta Trunk colors on theme toggle
+  if (window.VANTA && window.VANTA.TRUNK && vantaInstance) {
+    const accentColor = isLight ? 0xe54b2a : 0xff5e3a;
+    vantaInstance.setOptions({
+      color: accentColor
+    });
+  }
 }
 
 function initTheme() {
@@ -654,6 +668,116 @@ function initAll() {
   initPageLoader();
   initBackToTop();
   initModals();
+  initVanta();
+}
+
+async function initVanta() {
+  const heroEl = document.getElementById('home');
+  if (!heroEl || prefersReducedMotion) return;
+
+  // Dynamically load p5.js if not already present
+  if (!window.p5) {
+    try {
+      await loadScript('https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js');
+    } catch (e) {
+      console.error('Failed to load p5.js CDN', e);
+      return;
+    }
+  }
+
+  // Dynamically load Vanta Trunk if not already present
+  if (!window.VANTA || !window.VANTA.TRUNK) {
+    try {
+      await loadScript('https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.trunk.min.js');
+    } catch (e) {
+      console.error('Failed to load Vanta.js Trunk CDN', e);
+      return;
+    }
+  }
+
+  if (vantaInstance) {
+    vantaInstance.destroy();
+    vantaInstance = null;
+  }
+
+  const isLight = document.documentElement.classList.contains('light');
+  const accentColor = isLight ? 0xe54b2a : 0xff5e3a;
+
+  try {
+    vantaInstance = window.VANTA.TRUNK({
+      el: '#home',
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      color: accentColor,
+      backgroundColor: isLight ? 0xf5f5f5 : 0x0a0a0a,
+      spacing: 0.50,
+      chaos: 0.50
+    });
+
+    // Register scroll event for dynamic chaos scaling and translation alignments
+    registerListener(window, 'scroll', handleScrollVanta, { passive: true });
+    
+    // Run once on init to position correctly
+    handleScrollVanta();
+  } catch (err) {
+    console.error('Vanta.js Trunk initialization failed', err);
+  }
+}
+
+function handleScrollVanta() {
+  const heroEl = document.getElementById('home');
+  if (!heroEl || !vantaInstance) return;
+
+  const scrollY = window.scrollY;
+  const heroHeight = heroEl.offsetHeight;
+  const scrollPercent = Math.min(1, Math.max(0, scrollY / heroHeight));
+
+  // 1. Chaos interpolation: 0.50 at top, 10.0 at bottom of hero fold
+  const currentChaos = 0.50 + scrollPercent * (10.0 - 0.50);
+  
+  if (typeof vantaInstance.setOptions === 'function') {
+    vantaInstance.setOptions({
+      chaos: currentChaos
+    });
+  }
+
+  // 2. Alignment translation shift: shift from left to right as scroll increases
+  const canvasEl = heroEl.querySelector('canvas.vanta-canvas');
+  if (canvasEl) {
+    const shiftX = (scrollPercent * 60) - 30; // translates from -30px to +30px
+    canvasEl.style.transform = `translateX(${shiftX}px) scale(1.15)`;
+    canvasEl.style.transformOrigin = 'center center';
+  }
+}
+
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    const existing = document.querySelector(`script[src="${src}"]`);
+    if (existing) {
+      if (existing.dataset.loaded === 'true') {
+        resolve();
+      } else {
+        existing.addEventListener('load', resolve);
+        existing.addEventListener('error', reject);
+      }
+      return;
+    }
+
+    const s = document.createElement('script');
+    s.src = src;
+    s.async = true;
+    s.onload = () => {
+      s.dataset.loaded = 'true';
+      resolve();
+    };
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
 }
 
 document.addEventListener('astro:page-load', initAll);

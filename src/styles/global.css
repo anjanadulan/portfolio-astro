@@ -2370,3 +2370,12 @@ body.skills-active #projects .extra-projects {
 @property --c-9 { syntax: '<color>'; inherits: false; initial-value: hsla(359, 100%, 30%, 1) }
 @property --s-start-9 { syntax: '<percentage>'; inherits: false; initial-value: 8.392121895570533% }
 @property --s-end-9 { syntax: '<percentage>'; inherits: false; initial-value: 31.77166380372925% }
+
+/* Vanta Trunk Canvas Blur & Transformation Styles */
+#home canvas.vanta-canvas {
+  filter: blur(6px);
+  opacity: 0.55;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+  will-change: transform;
+}
+
