@@ -491,18 +491,43 @@ function initPageLoader() {
   const loader = document.getElementById('page-loader');
   if (!loader) {
     document.body.classList.add('loaded');
+    initVanta();
     return;
   }
 
+  let loaderHidden = false;
   const hideLoader = () => {
+    if (loaderHidden) return;
+    loaderHidden = true;
     setTimeout(() => {
       loader.classList.add('hidden');
       document.body.classList.add('loaded');
     }, 200);
   };
 
-  if (document.readyState === 'complete') hideLoader();
-  else registerListener(window, 'load', hideLoader);
+  // Safely limit loading screen time to 4.5 seconds max
+  const safetyTimeoutId = registerTimeout(hideLoader, 4500);
+
+  const checkAndHide = async () => {
+    const bgEl = document.getElementById('vanta-bg');
+    const needsVanta = bgEl && !prefersReducedMotion && !vantaInstance;
+
+    if (needsVanta) {
+      try {
+        await initVanta();
+      } catch (err) {
+        console.error("Vanta init failed inside loader", err);
+      }
+    }
+
+    hideLoader();
+  };
+
+  if (document.readyState === 'complete') {
+    checkAndHide();
+  } else {
+    registerListener(window, 'load', checkAndHide);
+  }
 }
 
 function initBackToTop() {
@@ -668,19 +693,6 @@ function initAll() {
   initPageLoader();
   initBackToTop();
   initModals();
-
-  // Defer Vanta background Canvas and large p5.js scripts to boost PageSpeed metrics
-  let vantaTriggered = false;
-  const triggerVanta = () => {
-    if (vantaTriggered) return;
-    vantaTriggered = true;
-    initVanta();
-  };
-  registerListener(window, 'scroll', triggerVanta, { passive: true });
-  registerListener(window, 'mousemove', triggerVanta, { passive: true });
-  registerListener(window, 'touchstart', triggerVanta, { passive: true });
-  registerTimeout(triggerVanta, 1500);
-
   initCarousel();
 }
 
