@@ -281,7 +281,7 @@ h1, h2, h3, h4 {
 .card,
 .project-card,
 .contact-content {
-  background: var(--glass-bg);
+  background: #0c0c0c99;
   border: 1px solid var(--glass-border);
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
@@ -295,7 +295,7 @@ h1, h2, h3, h4 {
 .contact-content:hover {
   transform: translateY(-6px) scale(1.02);
   border-color: rgba(255, 255, 255, 0.35);
-  background: rgba(255, 255, 255, 0.08);
+  background: #0c0c0c50;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), var(--glass-shadow);
@@ -1031,7 +1031,7 @@ section {
   position: relative;
   padding: 1.25rem;
   border-radius: 16px;
-  background: var(--glass-bg);
+  background: #0c0c0c99;
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
   box-shadow: var(--glass-shadow);
@@ -1132,7 +1132,7 @@ section {
   padding: clamp(1.5rem, 3vw, 2rem);
   border-radius: 16px;
   border: 1px solid var(--glass-border);
-  background: var(--glass-bg);
+  background: #0c0c0c99;
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
   box-shadow: var(--glass-shadow);
@@ -1534,7 +1534,7 @@ body.skills-active #projects .extra-projects {
   flex: 1;
   flex-direction: column;
   padding: clamp(1rem, 2vw, 1.25rem);
-  background: var(--glass-bg);
+  background: #0c0c0c; 
   border-top: 1px solid var(--glass-border);
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
